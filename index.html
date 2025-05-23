@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: transparent;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,11 +24,26 @@
             width: 90%;
             max-width: 1000px;
             height: 90vh;
-            background: white;
+            background: linear-gradient(135deg, #fff 0%, #fffaf0 100%);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2), 0 0 50px rgba(255, 215, 0, 0.1);
+            border: 3px solid #ffd700;
             overflow: hidden;
             position: relative;
+        }
+
+        .presentation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                        linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.05) 50%, transparent 55%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .slide {
@@ -41,6 +56,7 @@
             align-items: center;
             text-align: center;
             position: relative;
+            z-index: 1;
             animation: slideIn 0.5s ease-in-out;
         }
 
@@ -55,27 +71,29 @@
 
         .slide h1 {
             font-size: 3em;
-            color: #2c3e50;
+            color: #ff8c00;
             margin-bottom: 30px;
             font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(255, 140, 0, 0.3);
         }
 
         .slide h2 {
             font-size: 2.5em;
-            color: #3498db;
+            color: #228b22;
             margin-bottom: 25px;
             font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(34, 139, 34, 0.2);
         }
 
         .slide h3 {
             font-size: 2em;
-            color: #e74c3c;
+            color: #ffa500;
             margin-bottom: 20px;
         }
 
         .slide p {
             font-size: 1.3em;
-            color: #34495e;
+            color: #2f4f2f;
             line-height: 1.6;
             margin-bottom: 15px;
             max-width: 800px;
@@ -83,25 +101,28 @@
 
         .logo {
             position: absolute;
-            top: 30px;
+            top: 20px;
             right: 30px;
-            background: linear-gradient(45deg, #f39c12, #e67e22);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 1.1em;
+            width: 220px;
+            height: auto;
+            z-index: 10;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
         }
 
         .value-box {
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
             padding: 20px 30px;
             border-radius: 15px;
             font-size: 1.5em;
             font-weight: bold;
             margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(255, 165, 0, 0.3);
         }
 
         .checklist {
@@ -111,21 +132,21 @@
 
         .checklist li {
             font-size: 1.2em;
-            color: #2c3e50;
+            color: #2f4f2f;
             margin: 15px 0;
             padding-left: 40px;
             position: relative;
         }
 
         .checklist li:before {
-            content: "✅";
+            content: "🌞";
             position: absolute;
             left: 0;
             font-size: 1.5em;
         }
 
         .step-number {
-            background: #3498db;
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
             width: 60px;
             height: 60px;
@@ -136,16 +157,18 @@
             font-size: 2em;
             font-weight: bold;
             margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3);
         }
 
         .warning {
-            background: #e74c3c;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
             font-weight: bold;
             margin: 20px 0;
             display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
         .warning:before {
@@ -163,19 +186,24 @@
         .stat {
             text-align: center;
             padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+            border-radius: 15px;
+            border: 2px solid #ffd700;
         }
 
         .stat-number {
             font-size: 4em;
             font-weight: bold;
-            color: #e74c3c;
+            color: #ff8c00;
             display: block;
+            text-shadow: 2px 2px 4px rgba(255, 140, 0, 0.3);
         }
 
         .stat-label {
             font-size: 1.2em;
-            color: #34495e;
+            color: #228b22;
             margin-top: 10px;
+            font-weight: bold;
         }
 
         .navigation {
@@ -186,10 +214,11 @@
             display: flex;
             gap: 20px;
             align-items: center;
+            z-index: 10;
         }
 
         .nav-btn {
-            background: #3498db;
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -198,27 +227,29 @@
             font-size: 1em;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
         }
 
         .nav-btn:hover {
-            background: #2980b9;
+            background: linear-gradient(45deg, #ff8c00, #ff7f00);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
         }
 
         .nav-btn:disabled {
             background: #bdc3c7;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
         .slide-counter {
-            background: #34495e;
+            background: linear-gradient(45deg, #228b22, #32cd32);
             color: white;
             padding: 8px 15px;
             border-radius: 20px;
             font-weight: bold;
+            box-shadow: 0 5px 15px rgba(34, 139, 34, 0.3);
         }
 
         .progress-bar {
@@ -226,13 +257,14 @@
             top: 0;
             left: 0;
             height: 5px;
-            background: #3498db;
+            background: linear-gradient(90deg, #ffa500, #ffd700);
             transition: width 0.3s ease;
             border-radius: 0 0 5px 0;
+            z-index: 5;
         }
 
         .exclusive-badge {
-            background: #e74c3c;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
             padding: 10px 20px;
             border-radius: 25px;
@@ -241,6 +273,7 @@
             top: 20px;
             left: 20px;
             animation: pulse 2s infinite;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
         }
 
         @keyframes pulse {
@@ -250,7 +283,7 @@
         }
 
         .highlight {
-            background: linear-gradient(45deg, #f39c12, #e67e22);
+            background: linear-gradient(45deg, #ff8c00, #ffd700);
             color: white;
             padding: 5px 15px;
             border-radius: 5px;
@@ -259,13 +292,19 @@
 
         .invoice-mockup {
             background: white;
-            border: 2px solid #ddd;
+            border: 2px solid #ffd700;
             border-radius: 10px;
             padding: 20px;
             margin: 20px;
             font-family: monospace;
             text-align: left;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .solar-icon {
+            color: #ffa500;
+            font-size: 1.5em;
+            margin: 0 10px;
         }
 
         @media (max-width: 768px) {
@@ -295,6 +334,12 @@
                 padding: 10px 20px;
                 font-size: 0.9em;
             }
+
+            .logo {
+                width: 150px;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
@@ -304,28 +349,35 @@
         
         <!-- Slide 1: Accueil -->
         <div class="slide active">
-            <div class="logo">Electro Concept OI</div>
-            <h1>Félicitations !</h1>
+            <div class="logo">
+                <!-- REMPLACEZ LE SRC CI-DESSOUS PAR LE CHEMIN VERS VOTRE LOGO -->
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
+            <h1>🌞 Félicitations !</h1>
             <p>Vous venez de réserver votre consultation solaire gratuite avec Electro Concept OI</p>
-            <p style="font-size: 1.5em; color: #27ae60; font-weight: bold; margin-top: 30px;">
+            <p style="font-size: 1.5em; color: #228b22; font-weight: bold; margin-top: 30px;">
                 Vous avez fait le bon choix pour économiser sur votre facture d'électricité
             </p>
         </div>
 
         <!-- Slide 2: Pourquoi cette consultation -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <h2>Pourquoi cette consultation va changer votre facture d'électricité</h2>
             <p><strong>L'objectif de votre consultation :</strong> découvrir exactement combien vous pouvez économiser</p>
-            <p style="color: #e74c3c; font-weight: bold;">Beaucoup de Réunionnais ratent cette opportunité par manque de préparation</p>
-            <p style="font-size: 1.4em; color: #27ae60;">Suivez ce guide pour maximiser vos résultats</p>
+            <p style="color: #ff6b35; font-weight: bold;">Beaucoup de Réunionnais ratent cette opportunité par manque de préparation</p>
+            <p style="font-size: 1.4em; color: #228b22;">Suivez ce guide pour maximiser vos résultats <span class="solar-icon">☀️</span></p>
         </div>
 
         <!-- Slide 3: Ce que vous allez recevoir -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <h2>Ce que vous allez recevoir</h2>
-            <div class="value-box">valeur 494€</div>
+            <div class="value-box">valeur 494€ <span class="solar-icon">💰</span></div>
             <ul class="checklist">
                 <li>Analyse personnalisée de votre habitation</li>
                 <li>Calcul précis de vos économies sur 25 ans</li>
@@ -336,9 +388,11 @@
 
         <!-- Slide 4: 2 étapes simples -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <h2>2 étapes simples pour réussir votre consultation</h2>
-            <p style="font-size: 1.4em; margin-bottom: 30px;">Nous allons vous expliquer en 30 secondes</p>
+            <p style="font-size: 1.4em; margin-bottom: 30px;">Nous allons vous expliquer en 30 secondes <span class="solar-icon">⏱️</span></p>
             <p style="font-size: 1.3em;">Comment bien vous préparer</p>
             <p>Ces étapes sont au nombre de 2, elles sont très simples</p>
             <div class="step-number">2</div>
@@ -346,7 +400,9 @@
 
         <!-- Slide 5: Étape 1 -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <div class="step-number">1</div>
             <h2>ÉTAPE 1 : Vérifiez vos emails</h2>
             <ul class="checklist">
@@ -359,7 +415,9 @@
 
         <!-- Slide 6: Étape 2 -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <div class="step-number">2</div>
             <h2>ÉTAPE 2 : Préparez vos factures d'électricité</h2>
             <ol style="text-align: left; font-size: 1.2em; margin: 20px 0;">
@@ -367,8 +425,8 @@
                 <li>Même si c'est seulement 2-3 minutes de votre temps</li>
                 <li>C'est essentiel pour calculer vos économies précises</li>
             </ol>
-            <p style="font-size: 1.3em; color: #e74c3c; font-weight: bold;">
-                Sans factures = Consultation moins efficace
+            <p style="font-size: 1.3em; color: #ff6b35; font-weight: bold;">
+                Sans factures = Consultation moins efficace <span class="solar-icon">📄</span>
             </p>
             <div class="invoice-mockup">
                 <strong>EDF Réunion - Facture d'électricité</strong><br>
@@ -382,7 +440,9 @@
 
         <!-- Slide 7: Statistiques -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <h2>Rejoignez les familles qui économisent déjà grâce à l'énergie solaire</h2>
             <div class="stats-container">
                 <div class="stat">
@@ -395,34 +455,38 @@
                 </div>
             </div>
             <p>Nos experts ont aidé plus de 100 familles réunionnaises à réduire considérablement leur facture d'électricité.</p>
-            <p style="font-weight: bold; color: #27ae60;">Économies moyennes : 74% sur la facture d'électricité</p>
+            <p style="font-weight: bold; color: #228b22;">Économies moyennes : 74% sur la facture d'électricité <span class="solar-icon">💡</span></p>
         </div>
 
         <!-- Slide 8: Exclusivité -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
             <div class="exclusive-badge">EXCLUSIF</div>
             <h2>Cette consultation gratuite est une opportunité unique</h2>
-            <p style="font-size: 1.4em; color: #3498db;">Votre consultation est réservée exclusivement pour vous.</p>
+            <p style="font-size: 1.4em; color: #228b22;">Votre consultation est réservée exclusivement pour vous.</p>
             <p style="font-size: 1.3em;">Soyez présent, cette opportunité ne se représentera pas</p>
-            <p>Notre expert solaire certifié analysera votre situation pour des économies maximales</p>
+            <p>Notre expert solaire certifié analysera votre situation pour des économies maximales <span class="solar-icon">👨‍💼</span></p>
             <div class="warning">Important : Soyez présent le jour J</div>
-            <p style="color: #e74c3c; font-weight: bold; font-size: 1.2em;">
+            <p style="color: #ff6b35; font-weight: bold; font-size: 1.2em;">
                 En cas d'absence : <span class="highlight">AUCUN</span> second rendez-vous
             </p>
         </div>
 
         <!-- Slide 9: Conclusion -->
         <div class="slide">
-            <div class="logo">Electro Concept OI</div>
-            <h2>Votre transition vers l'énergie propre commence maintenant !</h2>
-            <p style="font-size: 1.4em; color: #27ae60; font-weight: bold;">À très bientôt pour votre consultation !</p>
+            <div class="logo">
+                <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
+            </div>
+            <h2>Votre transition vers l'énergie propre commence maintenant ! 🌱</h2>
+            <p style="font-size: 1.4em; color: #228b22; font-weight: bold;">À très bientôt pour votre consultation ! <span class="solar-icon">🤝</span></p>
             <p>Merci d'avoir pris le temps de lire ce guide</p>
             <p>Votre expert solaire a hâte de vous aider</p>
-            <p style="font-size: 1.3em; color: #3498db;">Ensemble, réduisons votre facture d'électricité</p>
+            <p style="font-size: 1.3em; color: #ff8c00;">Ensemble, réduisons votre facture d'électricité <span class="solar-icon">⚡</span></p>
             <p style="margin-top: 40px; font-style: italic;">
                 Avec nos meilleures salutations solaires,<br>
-                <strong>L'équipe Electro Concept OI</strong>
+                <strong>L'équipe Electro Concept OI</strong> <span class="solar-icon">☀️</span>
             </p>
         </div>
 
