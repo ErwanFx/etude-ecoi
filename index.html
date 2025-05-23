@@ -32,19 +32,19 @@
             position: relative;
         }
 
-        /* Slide spéciale rouge pour l'urgence (slide 8) */
+        /* Slide spéciale rouge pour l'urgence (slide 8) - Version Smooth */
         .slide.urgent {
-            background: linear-gradient(135deg, #dc143c 0%, #b22222 50%, #8b0000 100%);
+            background: linear-gradient(135deg, #8b0000 0%, #a0522d 50%, #cd853f 100%);
             color: white;
-            box-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
-            border: 3px solid #ff4500;
-            animation: urgentPulse 3s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+            border: 2px solid #daa520;
+            animation: gentlePulse 4s ease-in-out infinite;
         }
 
         .slide.urgent h2 {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            font-size: 2.8em;
+            color: #fff8dc;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            font-size: 2.6em;
         }
 
         .slide.urgent p {
@@ -52,46 +52,40 @@
         }
 
         .slide.urgent .exclusive-badge {
-            background: linear-gradient(45deg, #ff0000, #ff6347);
-            animation: urgentBlink 1.5s ease-in-out infinite;
-            font-size: 1.2em;
-            padding: 15px 30px;
+            background: linear-gradient(45deg, #b22222, #cd853f);
+            animation: gentleBlink 3s ease-in-out infinite;
+            font-size: 1.1em;
+            padding: 12px 25px;
         }
 
         .slide.urgent .warning {
-            background: linear-gradient(45deg, #ff0000, #ff4500);
-            font-size: 1.3em;
-            padding: 20px 35px;
-            animation: shake 2s ease-in-out infinite;
+            background: linear-gradient(45deg, #a0522d, #cd853f);
+            font-size: 1.2em;
+            padding: 18px 30px;
+            box-shadow: 0 5px 15px rgba(160, 82, 45, 0.3);
         }
 
         .slide.urgent .highlight {
-            background: linear-gradient(45deg, #ffff00, #ffd700);
+            background: linear-gradient(45deg, #ffd700, #daa520);
             color: #8b0000;
-            font-size: 1.2em;
-            padding: 8px 20px;
-            animation: flash 2s ease-in-out infinite;
+            font-size: 1.1em;
+            padding: 6px 18px;
+            animation: gentleGlow 3s ease-in-out infinite;
         }
 
-        @keyframes urgentPulse {
+        @keyframes gentlePulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.005); }
         }
 
-        @keyframes urgentBlink {
-            0%, 50% { opacity: 1; }
-            25%, 75% { opacity: 0.7; }
+        @keyframes gentleBlink {
+            0%, 80% { opacity: 1; }
+            90% { opacity: 0.8; }
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        @keyframes flash {
-            0%, 100% { background: linear-gradient(45deg, #ffff00, #ffd700); }
-            50% { background: linear-gradient(45deg, #ffd700, #ffff00); }
+        @keyframes gentleGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
         }
 
         .slide {
@@ -515,25 +509,25 @@
             <p style="font-weight: bold; color: #228b22;">Économies moyennes : 74% sur la facture d'électricité <span class="solar-icon">💡</span></p>
         </div>
 
-        <!-- Slide 8: Exclusivité URGENTE -->
+        <!-- Slide 8: Exclusivité IMPORTANTE -->
         <div class="slide urgent">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <div class="exclusive-badge">🚨 EXCLUSIF 🚨</div>
-            <h2>⚠️ ATTENTION : DERNIÈRE CHANCE ⚠️</h2>
-            <p style="font-size: 1.6em; font-weight: bold; margin: 20px 0;">Cette consultation gratuite est une opportunité UNIQUE</p>
-            <p style="font-size: 1.4em; font-weight: bold;">Votre consultation est réservée exclusivement pour vous.</p>
-            <p style="font-size: 1.5em; color: #ffff00; font-weight: bold; margin: 20px 0;">
-                🔥 Soyez présent, cette opportunité ne se représentera JAMAIS 🔥
+            <div class="exclusive-badge">✨ EXCLUSIF ✨</div>
+            <h2>💎 Opportunité Unique et Limitée</h2>
+            <p style="font-size: 1.5em; font-weight: bold; margin: 20px 0;">Cette consultation gratuite est réservée exclusivement pour vous</p>
+            <p style="font-size: 1.3em; font-weight: bold;">Votre créneau a été spécialement bloqué dans notre agenda.</p>
+            <p style="font-size: 1.4em; color: #ffd700; font-weight: bold; margin: 20px 0;">
+                ⭐ Soyez présent, cette chance ne se représentera pas ⭐
             </p>
             <p style="font-size: 1.2em;">Notre expert solaire certifié analysera votre situation pour des économies maximales 👨‍💼</p>
-            <div class="warning">⚠️ CRUCIAL : Soyez présent le jour J ⚠️</div>
-            <p style="font-weight: bold; font-size: 1.4em; margin-top: 20px;">
-                En cas d'absence : <span class="highlight">AUCUN SECOND RENDEZ-VOUS</span>
+            <div class="warning">🎯 Important : Votre présence est essentielle</div>
+            <p style="font-weight: bold; font-size: 1.3em; margin-top: 20px;">
+                En cas d'absence : <span class="highlight">Aucun second rendez-vous possible</span>
             </p>
-            <p style="font-size: 1.3em; color: #ffff00; font-weight: bold; margin-top: 15px;">
-                ❌ ABSENT = OPPORTUNITÉ PERDUE À VIE ❌
+            <p style="font-size: 1.2em; color: #ffd700; font-weight: bold; margin-top: 15px;">
+                📅 Une seule chance = Soyez au rendez-vous
             </p>
         </div>
 
