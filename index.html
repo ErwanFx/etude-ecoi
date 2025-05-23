@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Electro Concept OI - Consultation Solaire</title>
     <style>
-        /* Reset et base - scoped pour éviter les conflits */
+        /* Mobile-first approach */
         .solar-presentation * {
             margin: 0;
             padding: 0;
@@ -15,36 +15,19 @@
         .solar-presentation {
             font-family: 'Arial', sans-serif;
             width: 100%;
-            max-width: 1000px;
+            max-width: 100vw;
             margin: 0 auto;
             background: linear-gradient(135deg, #fff 0%, #fffaf0 100%);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.15);
-            border: 2px solid #ffd700;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.1);
+            border: 1px solid #ffd700;
             overflow: hidden;
             position: relative;
-            min-height: 500px;
+            min-height: 80vh;
+            max-height: 90vh;
         }
 
-        /* Container responsive - s'adapte au contenu */
-        @media (min-width: 769px) {
-            .solar-presentation {
-                height: 80vh;
-                min-height: 600px;
-                max-height: 800px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .solar-presentation {
-                border-radius: 10px;
-                border-width: 1px;
-                box-shadow: 0 5px 15px rgba(255, 165, 0, 0.1);
-                min-height: 70vh;
-            }
-        }
-
-        /* Background effects - simplifiés sur mobile */
+        /* Simple background for mobile */
         .solar-presentation::before {
             content: '';
             position: absolute;
@@ -52,17 +35,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
-        }
-
-        @media (min-width: 769px) {
-            .solar-presentation::before {
-                background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
-                           linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.05) 50%, transparent 55%);
-            }
         }
 
         /* Progress bar */
@@ -70,106 +45,66 @@
             position: absolute;
             top: 0;
             left: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(90deg, #ffa500, #ffd700);
             transition: width 0.3s ease;
-            border-radius: 0 0 4px 0;
             z-index: 10;
         }
 
-        /* Avatar Progress - optimisé mobile */
+        /* Simplified avatar for mobile */
         .avatar-progress {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 8px 12px;
-            border-radius: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 10px;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             z-index: 10;
-            font-size: 0.85rem;
+            font-size: 0.7rem;
         }
 
         .avatar {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
-            margin-right: 8px;
-            animation: avatarBounce 3s ease-in-out infinite;
-        }
-
-        @keyframes avatarBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+            font-size: 0.9em;
+            margin-right: 6px;
         }
 
         .progress-text {
             font-weight: bold;
             color: #2f4f2f;
-            display: none;
+            display: none; /* Hidden on mobile */
         }
 
-        @media (min-width: 481px) {
-            .avatar-progress {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-            
-            .avatar {
-                width: 36px;
-                height: 36px;
-                margin-right: 10px;
-            }
-            
-            .progress-text {
-                display: block;
-            }
-        }
-
-        /* Logo - responsive */
+        /* Compact logo */
         .logo {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 100px;
+            top: 10px;
+            right: 10px;
+            width: 80px;
             height: auto;
             z-index: 10;
-        }
-
-        @media (min-width: 481px) {
-            .logo {
-                width: 140px;
-                top: 20px;
-                right: 20px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .logo {
-                width: 180px;
-                top: 20px;
-                right: 30px;
-            }
         }
 
         .logo img {
             width: 100%;
             height: auto;
-            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.1));
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
         }
 
-        /* Slides */
+        /* Slides - mobile optimized */
         .slide {
             width: 100%;
             height: 100%;
-            padding: 80px 20px 80px 20px;
+            padding: 50px 15px 70px 15px;
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -177,222 +112,97 @@
             text-align: center;
             position: relative;
             z-index: 5;
-            animation: slideIn 0.4s ease-out;
             overflow-y: auto;
-        }
-
-        @media (min-width: 481px) {
-            .slide {
-                padding: 90px 30px 90px 30px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide {
-                padding: 100px 40px 90px 40px;
-                overflow-y: visible;
-            }
+            -webkit-overflow-scrolling: touch;
         }
 
         .slide.active {
             display: flex;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Typography - responsive */
+        /* Mobile-first typography */
         .slide h1 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #ff8c00;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(255, 140, 0, 0.2);
             line-height: 1.2;
         }
 
         .slide h2 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #228b22;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(34, 139, 34, 0.1);
-            line-height: 1.3;
-        }
-
-        .slide h3 {
-            font-size: 1.2rem;
-            color: #ffa500;
-            margin-bottom: 12px;
+            line-height: 1.2;
         }
 
         .slide p {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #2f4f2f;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            max-width: 90%;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            max-width: 95%;
         }
 
-        @media (min-width: 481px) {
-            .slide h1 { font-size: 2.2rem; margin-bottom: 20px; }
-            .slide h2 { font-size: 1.7rem; margin-bottom: 18px; }
-            .slide h3 { font-size: 1.4rem; margin-bottom: 15px; }
-            .slide p { font-size: 1.1rem; margin-bottom: 15px; max-width: 85%; }
-        }
-
-        @media (min-width: 769px) {
-            .slide h1 { font-size: 2.8rem; margin-bottom: 25px; }
-            .slide h2 { font-size: 2.2rem; margin-bottom: 22px; }
-            .slide h3 { font-size: 1.8rem; margin-bottom: 18px; }
-            .slide p { font-size: 1.2rem; margin-bottom: 18px; max-width: 800px; }
-        }
-
-        /* Economy counter */
+        /* Compact elements */
         .economy-counter {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #228b22;
-            margin: 15px 0;
-            text-shadow: 1px 1px 3px rgba(34, 139, 34, 0.2);
+            margin: 10px 0;
         }
 
-        @media (min-width: 481px) {
-            .economy-counter { font-size: 3rem; margin: 18px 0; }
-        }
-
-        @media (min-width: 769px) {
-            .economy-counter { font-size: 3.5rem; margin: 20px 0; }
-        }
-
-        /* Buttons - optimisés pour le tactile */
         .discover-btn {
             background: linear-gradient(45deg, #32cd32, #228b22);
             color: white;
             border: none;
-            padding: 14px 28px;
-            border-radius: 25px;
-            font-size: 1rem;
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 6px 15px rgba(50, 205, 50, 0.25);
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(50, 205, 50, 0.2);
             transition: all 0.3s ease;
-            min-height: 48px; /* Accessibilité tactile */
-            min-width: 120px;
+            min-height: 44px;
         }
 
-        .discover-btn:hover, .discover-btn:active {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(50, 205, 50, 0.35);
+        .discover-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(50, 205, 50, 0.3);
         }
 
-        @media (min-width: 481px) {
-            .discover-btn {
-                padding: 16px 32px;
-                font-size: 1.1rem;
-                margin-top: 18px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .discover-btn {
-                padding: 18px 36px;
-                font-size: 1.2rem;
-                margin-top: 20px;
-                animation: pulse 3s infinite;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        /* Value box */
         .value-box {
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            font-size: 1.2rem;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: bold;
-            margin: 15px 0;
-            box-shadow: 0 6px 15px rgba(255, 165, 0, 0.25);
-            position: relative;
-            overflow: hidden;
+            margin: 10px 0;
+            box-shadow: 0 4px 10px rgba(255, 165, 0, 0.2);
         }
 
-        @media (min-width: 481px) {
-            .value-box {
-                padding: 18px 25px;
-                font-size: 1.3rem;
-                margin: 18px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .value-box {
-                padding: 20px 30px;
-                font-size: 1.5rem;
-                margin: 20px 0;
-            }
-        }
-
-        /* Benefits list - responsive grid */
+        /* Simplified benefits - single column on mobile */
         .benefits-list {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             width: 100%;
-            margin: 20px 0;
+            margin: 15px 0;
             text-align: left;
-        }
-
-        @media (min-width: 481px) {
-            .benefits-list {
-                gap: 15px;
-                margin: 25px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .benefits-list {
-                grid-template-columns: 1fr 1fr;
-                gap: 18px;
-                margin: 30px 0;
-                max-width: 800px;
-            }
         }
 
         .benefit-item {
             background: rgba(255, 215, 0, 0.08);
             border: 1px solid #ffd700;
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 10px;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
+            transform: translateY(15px);
+            transition: all 0.4s ease;
             cursor: pointer;
-            position: relative;
-            min-height: 60px;
-        }
-
-        @media (min-width: 481px) {
-            .benefit-item {
-                padding: 18px;
-                border-radius: 12px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .benefit-item {
-                padding: 20px;
-                border-radius: 15px;
-                border-width: 2px;
-            }
         }
 
         .benefit-item.revealed {
@@ -401,323 +211,135 @@
         }
 
         .benefit-item:active {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
             background: rgba(255, 215, 0, 0.15);
         }
 
-        @media (min-width: 769px) {
-            .benefit-item:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.25);
-                background: rgba(255, 215, 0, 0.15);
-            }
-        }
-
         .benefit-title {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #2f4f2f;
-            margin-bottom: 5px;
             line-height: 1.3;
         }
 
-        @media (min-width: 481px) {
-            .benefit-title { font-size: 1rem; }
-        }
-
-        @media (min-width: 769px) {
-            .benefit-title { font-size: 1.1rem; }
-        }
-
         .benefit-detail {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #666;
+            margin-top: 4px;
             display: none;
-            line-height: 1.4;
+            line-height: 1.3;
         }
 
-        @media (min-width: 481px) {
-            .benefit-detail { font-size: 0.9rem; }
-        }
-
-        .benefit-item:active .benefit-detail,
-        .benefit-item.show-detail .benefit-detail {
+        .benefit-item:active .benefit-detail {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
 
-        @media (min-width: 769px) {
-            .benefit-item:hover .benefit-detail {
-                display: block;
-                animation: fadeIn 0.3s ease;
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Stats container */
+        /* Compact stats */
         .stats-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             width: 100%;
-            margin: 20px 0;
-        }
-
-        @media (min-width: 481px) {
-            .stats-container {
-                flex-direction: row;
-                justify-content: space-around;
-                gap: 20px;
-                margin: 25px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .stats-container {
-                margin: 30px 0;
-            }
+            margin: 15px 0;
         }
 
         .stat {
             text-align: center;
-            padding: 15px;
+            padding: 12px;
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 165, 0, 0.08));
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid #ffd700;
-            flex: 1;
-        }
-
-        @media (min-width: 481px) {
-            .stat {
-                padding: 18px;
-                border-radius: 12px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .stat {
-                padding: 20px;
-                border-radius: 15px;
-                border-width: 2px;
-            }
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: #ff8c00;
             display: block;
-            text-shadow: 1px 1px 3px rgba(255, 140, 0, 0.2);
-        }
-
-        @media (min-width: 481px) {
-            .stat-number { font-size: 3rem; }
-        }
-
-        @media (min-width: 769px) {
-            .stat-number { font-size: 3.5rem; }
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #228b22;
-            margin-top: 8px;
+            margin-top: 5px;
             font-weight: bold;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
-        @media (min-width: 481px) {
-            .stat-label { font-size: 1rem; margin-top: 10px; }
-        }
-
-        @media (min-width: 769px) {
-            .stat-label { font-size: 1.1rem; margin-top: 12px; }
-        }
-
-        /* Navigation - optimisée mobile */
+        /* Compact navigation */
         .navigation {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 12px;
+            gap: 8px;
             align-items: center;
             z-index: 15;
-            padding: 0 15px;
-            width: calc(100% - 30px);
+            width: calc(100% - 20px);
             justify-content: center;
-        }
-
-        @media (min-width: 481px) {
-            .navigation {
-                bottom: 20px;
-                gap: 15px;
-                width: auto;
-                padding: 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .navigation {
-                bottom: 25px;
-                gap: 20px;
-            }
         }
 
         .nav-btn {
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 20px;
+            padding: 8px 12px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(255, 165, 0, 0.25);
-            min-height: 44px; /* Accessibilité tactile */
+            box-shadow: 0 2px 8px rgba(255, 165, 0, 0.2);
+            min-height: 40px;
             flex: 1;
-            max-width: 100px;
+            max-width: 80px;
         }
 
-        @media (min-width: 481px) {
-            .nav-btn {
-                padding: 12px 20px;
-                font-size: 1rem;
-                border-radius: 22px;
-                flex: none;
-                max-width: none;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .nav-btn {
-                padding: 12px 25px;
-                border-radius: 25px;
-            }
-        }
-
-        .nav-btn:hover, .nav-btn:active {
+        .nav-btn:active {
             background: linear-gradient(45deg, #ff8c00, #ff7f00);
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.35);
         }
 
         .nav-btn:disabled {
             background: #bdc3c7;
             cursor: not-allowed;
             transform: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .slide-counter {
             background: linear-gradient(45deg, #228b22, #32cd32);
             color: white;
-            padding: 8px 12px;
-            border-radius: 16px;
+            padding: 6px 10px;
+            border-radius: 12px;
             font-weight: bold;
-            box-shadow: 0 3px 10px rgba(34, 139, 34, 0.25);
-            font-size: 0.85rem;
-            order: 2;
+            font-size: 0.75rem;
+            box-shadow: 0 2px 8px rgba(34, 139, 34, 0.2);
         }
 
-        @media (max-width: 480px) {
-            .slide-counter {
-                order: 0;
-                margin-bottom: 8px;
-                width: 100%;
-                text-align: center;
-            }
-            
-            .navigation {
-                flex-wrap: wrap;
-                bottom: 10px;
-            }
-        }
-
-        @media (min-width: 481px) {
-            .slide-counter {
-                padding: 10px 15px;
-                border-radius: 18px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide-counter {
-                padding: 10px 16px;
-                border-radius: 20px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Step elements */
+        /* Simplified step elements */
         .step-number {
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.25);
-        }
-
-        @media (min-width: 481px) {
-            .step-number {
-                width: 55px;
-                height: 55px;
-                font-size: 1.7rem;
-                margin-bottom: 18px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .step-number {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-                margin-bottom: 20px;
-            }
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(255, 165, 0, 0.2);
         }
 
         .step-progress {
             width: 100%;
-            max-width: 300px;
-            height: 12px;
+            max-width: 250px;
+            height: 8px;
             background: rgba(255, 215, 0, 0.2);
-            border-radius: 6px;
-            margin: 15px 0;
+            border-radius: 4px;
+            margin: 10px 0;
             overflow: hidden;
-            position: relative;
-        }
-
-        @media (min-width: 481px) {
-            .step-progress {
-                max-width: 350px;
-                height: 15px;
-                border-radius: 8px;
-                margin: 18px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .step-progress {
-                max-width: 400px;
-                height: 18px;
-                border-radius: 10px;
-                margin: 20px 0;
-            }
         }
 
         .step-progress-fill {
@@ -725,131 +347,60 @@
             background: linear-gradient(45deg, #32cd32, #228b22);
             border-radius: inherit;
             width: 0%;
-            transition: width 1.5s ease-in-out;
+            transition: width 1s ease-in-out;
         }
 
-        /* Warning */
+        /* Compact warning */
         .warning {
             background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-weight: bold;
-            margin: 15px 0;
+            margin: 10px 0;
             display: inline-block;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
-        @media (min-width: 481px) {
-            .warning {
-                padding: 15px 22px;
-                border-radius: 10px;
-                margin: 18px 0;
-                font-size: 1rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .warning {
-                padding: 15px 25px;
-                font-size: 1.1rem;
-                margin: 20px 0;
-            }
+            box-shadow: 0 3px 8px rgba(255, 107, 53, 0.2);
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
 
         .warning:before {
             content: "⚠ ";
-            font-size: 1.1em;
         }
 
-        /* Highlight */
         .highlight {
             background: linear-gradient(45deg, #ff8c00, #ffd700);
             color: white;
-            padding: 4px 12px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 3px;
             font-weight: bold;
-            font-size: 0.95em;
+            font-size: 0.85em;
         }
 
-        @media (min-width: 481px) {
-            .highlight {
-                padding: 5px 14px;
-                border-radius: 5px;
-                font-size: 1em;
-            }
-        }
-
-        /* Exclusive badge */
+        /* Compact exclusive badge */
         .exclusive-badge {
             background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
+            padding: 6px 10px;
+            border-radius: 12px;
             font-weight: bold;
             position: absolute;
-            top: 15px;
-            left: 15px;
-            animation: gentle-pulse 3s infinite;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
-            font-size: 0.85rem;
+            top: 10px;
+            left: 10px;
+            font-size: 0.7rem;
             z-index: 12;
         }
 
-        @media (min-width: 481px) {
-            .exclusive-badge {
-                padding: 10px 18px;
-                border-radius: 22px;
-                font-size: 0.9rem;
-                top: 18px;
-                left: 18px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .exclusive-badge {
-                padding: 10px 20px;
-                border-radius: 25px;
-                font-size: 1rem;
-                top: 20px;
-                left: 20px;
-            }
-        }
-
-        @keyframes gentle-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Urgent slide */
+        /* Simplified urgent slide */
         .slide.urgent {
-            background: linear-gradient(135deg, #8b0000 0%, #a0522d 50%, #cd853f 100%);
+            background: linear-gradient(135deg, #8b0000 0%, #a0522d 100%);
             color: white;
-            box-shadow: inset 0 0 15px rgba(139, 0, 0, 0.3);
-            border-radius: 10px;
-            margin: 8px;
-            animation: gentlePulse 5s ease-in-out infinite;
-        }
-
-        @media (min-width: 481px) {
-            .slide.urgent {
-                margin: 10px;
-                border-radius: 12px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide.urgent {
-                margin: 10px;
-                border-radius: 15px;
-            }
+            border-radius: 8px;
+            margin: 5px;
         }
 
         .slide.urgent h2 {
             color: #fff8dc;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
         .slide.urgent p {
@@ -857,173 +408,63 @@
         }
 
         .slide.urgent .logo img {
-            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.7)) brightness(1.2);
             background: rgba(255,255,255,0.9);
-            border-radius: 6px;
-            padding: 6px;
+            border-radius: 4px;
+            padding: 4px;
         }
 
-        @media (min-width: 481px) {
-            .slide.urgent .logo img {
-                border-radius: 8px;
-                padding: 8px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide.urgent .logo img {
-                border-radius: 10px;
-                padding: 10px;
-            }
-        }
-
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.002); }
-        }
-
-        /* Lists styling */
+        /* Compact lists */
         .slide ul, .slide ol {
             text-align: left;
-            margin: 15px 0;
+            margin: 10px 0;
             padding-left: 0;
             list-style: none;
-            max-width: 90%;
-        }
-
-        @media (min-width: 481px) {
-            .slide ul, .slide ol {
-                margin: 18px 0;
-                max-width: 85%;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide ul, .slide ol {
-                margin: 20px 0;
-                max-width: 600px;
-            }
+            max-width: 95%;
         }
 
         .slide li {
-            margin: 10px 0;
-            padding: 8px 0;
-            font-size: 1rem;
+            margin: 6px 0;
+            padding: 4px 0;
+            font-size: 0.85rem;
             color: #2f4f2f;
-            line-height: 1.5;
-            position: relative;
+            line-height: 1.4;
         }
 
-        @media (min-width: 481px) {
-            .slide li {
-                margin: 12px 0;
-                padding: 10px 0;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .slide li {
-                margin: 15px 0;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Invoice mockup */
+        /* Compact invoice */
         .invoice-mockup {
             background: white;
             border: 1px solid #ffd700;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
             font-family: monospace;
             text-align: left;
-            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.15);
-            font-size: 0.85rem;
-            line-height: 1.4;
-            max-width: 90%;
+            box-shadow: 0 2px 8px rgba(255, 215, 0, 0.1);
+            font-size: 0.7rem;
+            line-height: 1.3;
+            max-width: 95%;
         }
 
-        @media (min-width: 481px) {
-            .invoice-mockup {
-                padding: 18px;
-                border-radius: 10px;
-                margin: 18px 0;
-                font-size: 0.9rem;
-                max-width: 85%;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .invoice-mockup {
-                padding: 20px;
-                margin: 20px 0;
-                font-size: 1rem;
-                max-width: 400px;
-            }
-        }
-
-        /* Email notification */
+        /* Compact email notification */
         .email-notification {
             background: #4285f4;
             color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 10px 0;
-            animation: notification-slide 4s ease-in-out infinite;
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 8px 0;
             display: inline-block;
         }
 
-        @media (min-width: 481px) {
-            .email-notification {
-                padding: 10px 18px;
-                font-size: 0.9rem;
-                margin: 12px 0;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .email-notification {
-                padding: 10px 20px;
-                font-size: 1rem;
-                margin: 15px 0;
-            }
-        }
-
-        @keyframes notification-slide {
-            0%, 100% { transform: translateX(-15px); opacity: 0.8; }
-            50% { transform: translateX(0px); opacity: 1; }
-        }
-
-        /* Calendar fill */
+        /* Compact calendar */
         .calendar-fill {
-            width: 45px;
-            height: 45px;
+            width: 35px;
+            height: 35px;
             background: white;
             border: 2px solid #ff8c00;
-            border-radius: 8px;
+            border-radius: 6px;
             position: relative;
-            margin: 15px auto;
-            animation: calendar-fill 2s ease-in-out;
-        }
-
-        @media (min-width: 481px) {
-            .calendar-fill {
-                width: 50px;
-                height: 50px;
-                margin: 18px auto;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .calendar-fill {
-                width: 60px;
-                height: 60px;
-                margin: 20px auto;
-                border-width: 3px;
-                border-radius: 10px;
-            }
+            margin: 10px auto;
         }
 
         .calendar-fill::before {
@@ -1032,86 +473,298 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.2em;
+            font-size: 1em;
         }
 
-        @media (min-width: 481px) {
-            .calendar-fill::before { font-size: 1.3em; }
-        }
-
-        @media (min-width: 769px) {
-            .calendar-fill::before { font-size: 1.5em; }
-        }
-
-        @keyframes calendar-fill {
-            0% { background: white; }
-            100% { background: #32cd32; }
-        }
-
-        /* Solar icon */
         .solar-icon {
             color: #ffa500;
-            font-size: 1.2em;
-            margin: 0 5px;
+            font-size: 1em;
+            margin: 0 3px;
         }
 
+        /* TABLET STYLES - 481px and up */
         @media (min-width: 481px) {
-            .solar-icon {
-                font-size: 1.3em;
-                margin: 0 8px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .solar-icon {
-                font-size: 1.5em;
-                margin: 0 10px;
-            }
-        }
-
-        /* Reduced animations on mobile for performance */
-        @media (max-width: 768px) {
-            * {
-                animation-duration: 0.3s !important;
-            }
-            
-            .benefit-item {
-                transition: all 0.3s ease;
-            }
-            
-            .step-progress-fill {
-                transition: width 1s ease-in-out;
-            }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
             .solar-presentation {
-                background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
-                border-color: #ffd700;
+                max-width: 600px;
+                border-radius: 12px;
+                min-height: 70vh;
+                max-height: 85vh;
             }
             
-            .slide p {
-                color: #e0e0e0;
+            .avatar-progress {
+                top: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .avatar {
+                width: 28px;
+                height: 28px;
+                margin-right: 8px;
+            }
+            
+            .progress-text {
+                display: block;
+            }
+            
+            .logo {
+                width: 100px;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .slide {
+                padding: 60px 25px 80px 25px;
+            }
+            
+            .slide h1 { font-size: 1.9rem; margin-bottom: 15px; }
+            .slide h2 { font-size: 1.5rem; margin-bottom: 12px; }
+            .slide p { font-size: 1rem; margin-bottom: 12px; }
+            
+            .economy-counter { font-size: 2.4rem; margin: 15px 0; }
+            
+            .discover-btn {
+                padding: 14px 24px;
+                font-size: 1rem;
+                margin-top: 15px;
+            }
+            
+            .value-box {
+                padding: 15px 20px;
+                font-size: 1.1rem;
+                margin: 15px 0;
+            }
+            
+            .stats-container {
+                flex-direction: row;
+                gap: 15px;
+                margin: 20px 0;
+            }
+            
+            .navigation {
+                bottom: 15px;
+                gap: 12px;
+                width: auto;
+            }
+            
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+                flex: none;
+                max-width: none;
+            }
+            
+            .slide-counter {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* DESKTOP STYLES - 769px and up */
+        @media (min-width: 769px) {
+            .solar-presentation {
+                max-width: 900px;
+                border-radius: 15px;
+                border-width: 2px;
+                min-height: 600px;
+                max-height: 800px;
+            }
+            
+            .solar-presentation::before {
+                background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%);
+            }
+            
+            .avatar-progress {
+                top: 20px;
+                left: 20px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .avatar {
+                width: 36px;
+                height: 36px;
+                margin-right: 10px;
+                animation: avatarBounce 3s ease-in-out infinite;
+            }
+            
+            @keyframes avatarBounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-3px); }
+            }
+            
+            .logo {
+                width: 160px;
+                top: 20px;
+                right: 30px;
+            }
+            
+            .slide {
+                padding: 80px 40px 90px 40px;
+                overflow-y: visible;
+            }
+            
+            .slide h1 { font-size: 2.5rem; margin-bottom: 20px; }
+            .slide h2 { font-size: 2rem; margin-bottom: 18px; }
+            .slide p { font-size: 1.1rem; margin-bottom: 15px; max-width: 700px; }
+            
+            .economy-counter { 
+                font-size: 3rem; 
+                margin: 20px 0;
+                animation: pulse 3s infinite;
+            }
+            
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            
+            .discover-btn {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+                margin-top: 20px;
+            }
+            
+            .discover-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(50, 205, 50, 0.3);
+            }
+            
+            .value-box {
+                padding: 18px 25px;
+                font-size: 1.3rem;
+                margin: 20px 0;
+            }
+            
+            .benefits-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                margin: 25px 0;
+                max-width: 700px;
             }
             
             .benefit-item {
-                background: rgba(255, 215, 0, 0.1);
-                border-color: #ffd700;
+                padding: 15px;
+                border-radius: 12px;
             }
+            
+            .benefit-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+                background: rgba(255, 215, 0, 0.15);
+            }
+            
+            .benefit-item:hover .benefit-detail {
+                display: block;
+            }
+            
+            .benefit-title { font-size: 1rem; }
+            .benefit-detail { font-size: 0.85rem; }
+            
+            .stats-container { margin: 25px 0; }
             
             .stat {
-                background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+                padding: 18px;
+                border-radius: 12px;
             }
             
-            .invoice-mockup {
-                background: #3a3a3a;
-                color: #e0e0e0;
-                border-color: #ffd700;
+            .stat-number { font-size: 2.8rem; }
+            .stat-label { font-size: 1rem; margin-top: 8px; }
+            
+            .navigation {
+                bottom: 20px;
+                gap: 20px;
             }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+                border-radius: 22px;
+            }
+            
+            .nav-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(255, 165, 0, 0.3);
+            }
+            
+            .slide-counter {
+                padding: 10px 15px;
+                font-size: 1rem;
+                border-radius: 18px;
+            }
+            
+            .step-number {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .step-progress {
+                max-width: 350px;
+                height: 15px;
+                margin: 15px 0;
+            }
+            
+            .warning {
+                padding: 12px 18px;
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+            
+            .exclusive-badge {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+                top: 20px;
+                left: 20px;
+                animation: gentle-pulse 3s infinite;
+            }
+            
+            @keyframes gentle-pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+            }
+            
+            .slide ul, .slide ol { max-width: 600px; }
+            .slide li { font-size: 1.1rem; margin: 10px 0; }
+            
+            .invoice-mockup {
+                padding: 15px;
+                font-size: 0.9rem;
+                max-width: 350px;
+            }
+            
+            .email-notification {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                margin: 10px 0;
+                animation: notification-slide 4s ease-in-out infinite;
+            }
+            
+            @keyframes notification-slide {
+                0%, 100% { transform: translateX(-10px); opacity: 0.8; }
+                50% { transform: translateX(0px); opacity: 1; }
+            }
+            
+            .calendar-fill {
+                width: 50px;
+                height: 50px;
+                margin: 15px auto;
+                animation: calendar-fill 2s ease-in-out;
+            }
+            
+            @keyframes calendar-fill {
+                0% { background: white; }
+                100% { background: #32cd32; }
+            }
+            
+            .solar-icon { font-size: 1.3em; margin: 0 8px; }
         }
 
-        /* Accessibility improvements */
+        /* Performance optimizations */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -1120,21 +773,16 @@
             }
         }
 
-        /* Focus states for accessibility */
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            .solar-presentation { border-width: 2px; }
+            .benefit-item, .stat { border-width: 2px; }
+        }
+
+        /* Focus states */
         .nav-btn:focus, .discover-btn:focus, .benefit-item:focus {
             outline: 2px solid #ffd700;
             outline-offset: 2px;
-        }
-
-        /* High contrast mode support */
-        @media (prefers-contrast: high) {
-            .solar-presentation {
-                border-width: 3px;
-            }
-            
-            .benefit-item, .stat {
-                border-width: 2px;
-            }
         }
     </style>
 </head>
@@ -1142,78 +790,74 @@
     <div class="solar-presentation">
         <div class="progress-bar" id="progressBar"></div>
         
-        <!-- Avatar Progress -->
         <div class="avatar-progress">
             <div class="avatar" id="avatar">🌱</div>
-            <div class="progress-text" id="avatarText">Début de votre parcours solaire</div>
+            <div class="progress-text" id="avatarText">Début</div>
         </div>
         
-        <!-- Slide 1: Accueil -->
+        <!-- Slide 1: Accueil simplifié -->
         <div class="slide active" id="slide1">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
             <h1>🌞 Félicitations !</h1>
-            <p>Vous venez de réserver votre consultation solaire gratuite avec Electro Concept OI</p>
+            <p>Votre consultation solaire gratuite est réservée</p>
             <div class="economy-counter" id="economyCounter">0€</div>
-            <p style="font-size: 1.1em; color: #666;">d'économies vous attendent !</p>
-            <p style="font-size: 1.3em; color: #228b22; font-weight: bold; margin-top: 15px;">
-                Vous avez fait le bon choix pour économiser sur votre facture d'électricité
-            </p>
+            <p style="color: #666;">d'économies vous attendent</p>
+            <p style="color: #228b22; font-weight: bold;">Réduisez votre facture d'électricité</p>
             <button class="discover-btn" onclick="changeSlide(1)">
-                🔍 Découvrir mes économies
+                🔍 Découvrir
             </button>
         </div>
 
-        <!-- Slide 2: Pourquoi cette consultation -->
+        <!-- Slide 2: Pourquoi - version courte -->
         <div class="slide">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <h2>Pourquoi cette consultation va changer votre facture d'électricité</h2>
-            <p><strong>L'objectif de votre consultation :</strong> découvrir exactement combien vous pouvez économiser</p>
-            <p style="color: #ff6b35; font-weight: bold;">Beaucoup de Réunionnais ratent cette opportunité par manque de préparation</p>
-            <p style="font-size: 1.2em; color: #228b22;">Suivez ce guide pour maximiser vos résultats <span class="solar-icon">☀️</span></p>
+            <h2>Cette consultation va changer votre facture</h2>
+            <p><strong>Objectif :</strong> découvrir vos économies exactes</p>
+            <p style="color: #ff6b35; font-weight: bold;">Beaucoup ratent cette opportunité</p>
+            <p style="color: #228b22; font-weight: bold;">Suivez ce guide <span class="solar-icon">☀️</span></p>
         </div>
 
-        <!-- Slide 3: Ce que vous recevez -->
+        <!-- Slide 3: Bénéfices simplifiés -->
         <div class="slide" id="slide3">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <h2>Ce que vous allez recevoir</h2>
+            <h2>Ce que vous recevez</h2>
             <div class="value-box">
-                valeur <span class="value-counter" id="valueCounter">0</span>€ <span class="solar-icon">💰</span>
+                <span id="valueCounter">494</span>€ de valeur <span class="solar-icon">💰</span>
             </div>
             <div class="benefits-list" id="benefitsList">
                 <div class="benefit-item" data-delay="0">
-                    <div class="benefit-title">🏠 Analyse personnalisée de votre habitation</div>
-                    <div class="benefit-detail">Étude complète de votre toiture, exposition et consommation</div>
+                    <div class="benefit-title">🏠 Analyse de votre maison</div>
+                    <div class="benefit-detail">Toiture, exposition, consommation</div>
                 </div>
-                <div class="benefit-item" data-delay="500">
-                    <div class="benefit-title">📊 Calcul précis de vos économies sur 25 ans</div>
-                    <div class="benefit-detail">Projection détaillée de votre retour sur investissement</div>
+                <div class="benefit-item" data-delay="300">
+                    <div class="benefit-title">📊 Calcul de vos économies</div>
+                    <div class="benefit-detail">Projection sur 25 ans</div>
                 </div>
-                <div class="benefit-item" data-delay="1000">
-                    <div class="benefit-title">💸 Montant exact des aides auxquelles vous avez droit</div>
-                    <div class="benefit-detail">Toutes les subventions et crédits d'impôt disponibles</div>
+                <div class="benefit-item" data-delay="600">
+                    <div class="benefit-title">💸 Montant des aides</div>
+                    <div class="benefit-detail">Toutes les subventions</div>
                 </div>
-                <div class="benefit-item" data-delay="1500">
-                    <div class="benefit-title">📋 Plan d'action sur-mesure</div>
-                    <div class="benefit-detail">Feuille de route personnalisée pour votre projet</div>
+                <div class="benefit-item" data-delay="900">
+                    <div class="benefit-title">📋 Plan d'action</div>
+                    <div class="benefit-detail">Feuille de route personnalisée</div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: 2 étapes simples -->
+        <!-- Slide 4: 2 étapes -->
         <div class="slide">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <h2>2 étapes simples pour réussir votre consultation</h2>
-            <p style="font-size: 1.2em; margin-bottom: 20px;">Nous allons vous expliquer en 30 secondes <span class="solar-icon">⏱️</span></p>
-            <p style="font-size: 1.1em;">Comment bien vous préparer</p>
-            <p>Ces étapes sont au nombre de 2, elles sont très simples</p>
+            <h2>2 étapes pour réussir</h2>
+            <p>Préparation en 30 secondes <span class="solar-icon">⏱️</span></p>
+            <p>Comment bien vous préparer</p>
             <div class="step-number">2</div>
             <div class="step-progress">
                 <div class="step-progress-fill" id="stepProgress4" style="width: 0%;"></div>
@@ -1226,15 +870,15 @@
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
             <div class="step-number">1</div>
-            <h2>ÉTAPE 1 : Vérifiez vos emails</h2>
-            <div class="email-notification">📧 Nouveau mail de confirmation reçu</div>
+            <h2>Vérifiez vos emails</h2>
+            <div class="email-notification">📧 Mail de confirmation</div>
             <ul>
-                <li>🌞 Allez dans votre boîte mail (Gmail, Yahoo, Orange...)</li>
-                <li>🌞 Cliquez sur notre mail de confirmation</li>
-                <li>🌞 Ajoutez le rendez-vous à votre calendrier</li>
+                <li>🌞 Ouvrez votre boîte mail</li>
+                <li>🌞 Cliquez sur notre confirmation</li>
+                <li>🌞 Ajoutez au calendrier</li>
             </ul>
             <div class="calendar-fill"></div>
-            <div class="warning">IMPORTANT : Sans cela, vous pourriez oublier votre consultation</div>
+            <div class="warning">IMPORTANT : Ne ratez pas votre consultation</div>
             <div class="step-progress">
                 <div class="step-progress-fill" id="stepProgress5" style="width: 0%;"></div>
             </div>
@@ -1246,67 +890,64 @@
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
             <div class="step-number">2</div>
-            <h2>ÉTAPE 2 : Préparez vos factures d'électricité</h2>
+            <h2>Préparez vos factures EDF</h2>
             <ol>
-                <li>Sortez vos 2 dernières factures EDF</li>
-                <li>Même si c'est seulement 2-3 minutes de votre temps</li>
-                <li>C'est essentiel pour calculer vos économies précises</li>
+                <li>Sortez 2 dernières factures</li>
+                <li>Seulement 2-3 minutes</li>
+                <li>Essentiel pour le calcul</li>
             </ol>
-            <p style="font-size: 1.1em; color: #ff6b35; font-weight: bold;">
-                Sans factures = Consultation moins efficace <span class="solar-icon">📄</span>
+            <p style="color: #ff6b35; font-weight: bold;">
+                Sans factures = Moins efficace <span class="solar-icon">📄</span>
             </p>
             <div class="invoice-mockup">
-                <strong>EDF Réunion - Facture d'électricité</strong><br>
-                Consommation: 482 kWh<br>
-                Période: Avril - Mai<br>
-                Tarif: Base<br>
-                Prix unitaire: 0,14€/kWh<br>
-                <strong>Total TTC: 89,75€</strong>
+                <strong>EDF Réunion</strong><br>
+                482 kWh - 89,75€<br>
+                Période: Avril-Mai
             </div>
             <div class="step-progress">
                 <div class="step-progress-fill" id="stepProgress6" style="width: 0%;"></div>
             </div>
         </div>
 
-        <!-- Slide 7: Statistiques -->
+        <!-- Slide 7: Stats -->
         <div class="slide">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <h2>Rejoignez les familles qui économisent déjà grâce à l'énergie solaire</h2>
+            <h2>Rejoignez les familles qui économisent</h2>
             <div class="stats-container">
                 <div class="stat">
                     <span class="stat-number">100+</span>
-                    <div class="stat-label">Familles réunionnaises aidées</div>
+                    <div class="stat-label">Familles aidées</div>
                 </div>
                 <div class="stat">
                     <span class="stat-number">74%</span>
-                    <div class="stat-label">D'économies sur la facture d'électricité</div>
+                    <div class="stat-label">D'économies moyennes</div>
                 </div>
             </div>
-            <p>Nos experts ont aidé plus de 100 familles réunionnaises à réduire considérablement leur facture d'électricité.</p>
-            <p style="font-weight: bold; color: #228b22;">Économies moyennes : 74% sur la facture d'électricité <span class="solar-icon">💡</span></p>
+            <p>Plus de 100 familles réunionnaises réduisent leur facture</p>
+            <p style="font-weight: bold; color: #228b22;">74% d'économies <span class="solar-icon">💡</span></p>
         </div>
 
-        <!-- Slide 8: Exclusivité IMPORTANTE -->
+        <!-- Slide 8: Exclusivité -->
         <div class="slide urgent">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <div class="exclusive-badge">✨ EXCLUSIF ✨</div>
-            <h2>💎 Opportunité Unique et Limitée</h2>
-            <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">Cette consultation gratuite est réservée exclusivement pour vous</p>
-            <p style="font-size: 1.1em; font-weight: bold;">Votre créneau a été spécialement bloqué dans notre agenda.</p>
-            <p style="font-size: 1.2em; color: #ffd700; font-weight: bold; margin: 15px 0;">
-                ⭐ Soyez présent, cette chance ne se représentera pas ⭐
+            <div class="exclusive-badge">✨ EXCLUSIF</div>
+            <h2>💎 Opportunité Unique</h2>
+            <p style="font-weight: bold;">Cette consultation gratuite est pour vous uniquement</p>
+            <p>Votre créneau est bloqué dans notre agenda</p>
+            <p style="color: #ffd700; font-weight: bold;">
+                ⭐ Soyez présent ⭐
             </p>
-            <p style="font-size: 1.1em;">Notre expert solaire certifié analysera votre situation pour des économies maximales 👨‍💼</p>
-            <div class="warning">🎯 Important : Votre présence est essentielle</div>
-            <p style="font-weight: bold; font-size: 1.1em; margin-top: 15px;">
-                En cas d'absence : <span class="highlight">Aucun second rendez-vous possible</span>
+            <p>Expert solaire certifié pour économies maximales</p>
+            <div class="warning">🎯 Votre présence est essentielle</div>
+            <p style="font-weight: bold;">
+                En cas d'absence : <span class="highlight">Aucun second RDV</span>
             </p>
-            <p style="font-size: 1.1em; color: #ffd700; font-weight: bold; margin-top: 12px;">
-                📅 Une seule chance = Soyez au rendez-vous
+            <p style="color: #ffd700; font-weight: bold;">
+                📅 Une seule chance
             </p>
         </div>
 
@@ -1315,24 +956,24 @@
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
-            <h2>Votre transition vers l'énergie propre commence maintenant ! 🌱</h2>
-            <p style="font-size: 1.2em; color: #228b22; font-weight: bold;">À très bientôt pour votre consultation ! <span class="solar-icon">🤝</span></p>
-            <p>Merci d'avoir pris le temps de lire ce guide</p>
-            <p>Votre expert solaire a hâte de vous aider</p>
-            <p style="font-size: 1.1em; color: #ff8c00;">Ensemble, réduisons votre facture d'électricité <span class="solar-icon">⚡</span></p>
-            <p style="margin-top: 30px; font-style: italic;">
-                Avec nos meilleures salutations solaires,<br>
-                <strong>L'équipe Electro Concept OI</strong> <span class="solar-icon">☀️</span>
+            <h2>C'est parti ! 🌱</h2>
+            <p style="color: #228b22; font-weight: bold;">À très bientôt ! <span class="solar-icon">🤝</span></p>
+            <p>Merci d'avoir lu ce guide</p>
+            <p>Votre expert a hâte de vous aider</p>
+            <p style="color: #ff8c00;">Réduisons votre facture <span class="solar-icon">⚡</span></p>
+            <p style="margin-top: 20px; font-style: italic;">
+                Salutations solaires,<br>
+                <strong>Équipe Electro Concept OI</strong> <span class="solar-icon">☀️</span>
             </p>
         </div>
 
-        <!-- Navigation -->
+        <!-- Navigation compacte -->
         <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" aria-label="Slide précédent">❮ Précédent</button>
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" aria-label="Précédent">❮</button>
             <div class="slide-counter">
-                <span id="currentSlide">1</span> / <span id="totalSlides">9</span>
+                <span id="currentSlide">1</span>/<span id="totalSlides">9</span>
             </div>
-            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)" aria-label="Slide suivant">Suivant ❯</button>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)" aria-label="Suivant">❯</button>
         </div>
     </div>
 
@@ -1341,33 +982,30 @@
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
         
-        // Avatar states
         const avatarStates = [
-            { emoji: '🌱', text: 'Début de votre parcours solaire' },
-            { emoji: '🌿', text: 'Découverte des avantages' },
-            { emoji: '💡', text: 'Compréhension des bénéfices' },
-            { emoji: '📋', text: 'Préparation en cours' },
-            { emoji: '📧', text: 'Étape email validée' },
-            { emoji: '📄', text: 'Documents préparés' },
-            { emoji: '📊', text: 'Prêt pour l\'analyse' },
-            { emoji: '⚡', text: 'Moment décisif!' },
-            { emoji: '🏆', text: 'Expert en économies solaires!' }
+            { emoji: '🌱', text: 'Début' },
+            { emoji: '🌿', text: 'Avantages' },
+            { emoji: '💡', text: 'Bénéfices' },
+            { emoji: '📋', text: 'Préparation' },
+            { emoji: '📧', text: 'Email OK' },
+            { emoji: '📄', text: 'Documents' },
+            { emoji: '📊', text: 'Prêt' },
+            { emoji: '⚡', text: 'Décisif!' },
+            { emoji: '🏆', text: 'Expert!' }
         ];
         
         document.getElementById('totalSlides').textContent = totalSlides;
         
-        // Animated counter with performance optimization
         function animateCounter(elementId, start, end, duration, suffix = '') {
             const element = document.getElementById(elementId);
             if (!element) return;
             
             const startTime = Date.now();
-            const startValue = parseInt(element.textContent) || start;
             
             function update() {
                 const now = Date.now();
                 const progress = Math.min((now - startTime) / duration, 1);
-                const current = Math.floor(progress * (end - startValue) + startValue);
+                const current = Math.floor(progress * (end - start) + start);
                 element.textContent = current + suffix;
                 
                 if (progress < 1) {
@@ -1378,42 +1016,24 @@
             update();
         }
         
-        // Benefits reveal with mobile optimization
         function revealBenefits() {
             const benefits = document.querySelectorAll('.benefit-item');
             benefits.forEach((benefit, index) => {
-                const delay = parseInt(benefit.dataset.delay) || index * 200;
+                const delay = parseInt(benefit.dataset.delay) || index * 150;
                 setTimeout(() => {
                     benefit.classList.add('revealed');
                 }, delay);
             });
         }
         
-        // Progress bar animation
         function animateProgressBar(elementId, targetWidth) {
             const progressBar = document.getElementById(elementId);
             if (progressBar) {
                 setTimeout(() => {
                     progressBar.style.width = targetWidth + '%';
-                }, 300);
+                }, 200);
             }
         }
-        
-        // Mobile benefit detail toggle
-        function toggleBenefitDetail(benefit) {
-            if (window.innerWidth <= 768) {
-                benefit.classList.toggle('show-detail');
-            }
-        }
-        
-        // Add touch support for benefits on mobile
-        document.addEventListener('DOMContentLoaded', function() {
-            const benefits = document.querySelectorAll('.benefit-item');
-            benefits.forEach(benefit => {
-                benefit.addEventListener('click', () => toggleBenefitDetail(benefit));
-                benefit.addEventListener('touchstart', () => toggleBenefitDetail(benefit));
-            });
-        });
         
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
@@ -1421,11 +1041,9 @@
             
             document.getElementById('currentSlide').textContent = index + 1;
             
-            // Update progress bar
             const progress = ((index + 1) / totalSlides) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
             
-            // Update avatar
             const avatarElement = document.getElementById('avatar');
             const avatarTextElement = document.getElementById('avatarText');
             if (avatarElement && avatarTextElement) {
@@ -1433,35 +1051,28 @@
                 avatarTextElement.textContent = avatarStates[index].text;
             }
             
-            // Slide-specific animations with performance checks
             switch(index) {
-                case 0: // Slide 1
+                case 0:
                     setTimeout(() => {
-                        animateCounter('economyCounter', 0, 494, 1500, '€');
-                    }, 500);
+                        animateCounter('economyCounter', 0, 494, 1200, '€');
+                    }, 400);
                     break;
-                    
-                case 2: // Slide 3
+                case 2:
                     setTimeout(() => {
                         revealBenefits();
-                        animateCounter('valueCounter', 0, 494, 1500);
-                    }, 300);
+                    }, 200);
                     break;
-                    
-                case 3: // Slide 4
+                case 3:
                     animateProgressBar('stepProgress4', 50);
                     break;
-                    
-                case 4: // Slide 5
+                case 4:
                     animateProgressBar('stepProgress5', 100);
                     break;
-                    
-                case 5: // Slide 6
+                case 5:
                     animateProgressBar('stepProgress6', 100);
                     break;
             }
             
-            // Update navigation buttons
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             if (prevBtn) prevBtn.disabled = index === 0;
@@ -1476,76 +1087,51 @@
             }
         }
         
-        // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                changeSlide(-1);
-            } else if (event.key === 'ArrowRight') {
-                changeSlide(1);
-            }
-        });
-        
-        // Enhanced touch/swipe support
+        // Touch events for mobile swipe
         let touchStartX = 0;
         let touchEndX = 0;
-        let touchStartY = 0;
-        let touchEndY = 0;
         
         document.addEventListener('touchstart', function(event) {
             touchStartX = event.changedTouches[0].screenX;
-            touchStartY = event.changedTouches[0].screenY;
         }, { passive: true });
         
         document.addEventListener('touchend', function(event) {
             touchEndX = event.changedTouches[0].screenX;
-            touchEndY = event.changedTouches[0].screenY;
-            handleSwipe();
-        }, { passive: true });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diffX = touchStartX - touchEndX;
-            const diffY = Math.abs(touchStartY - touchEndY);
+            const diff = touchStartX - touchEndX;
             
-            // Only handle horizontal swipes (avoid conflicts with vertical scrolling)
-            if (Math.abs(diffX) > swipeThreshold && diffY < 100) {
-                if (diffX > 0) {
-                    changeSlide(1); // Swipe left, go to next slide
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    changeSlide(1);
                 } else {
-                    changeSlide(-1); // Swipe right, go to previous slide
+                    changeSlide(-1);
                 }
             }
-        }
+        }, { passive: true });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') changeSlide(-1);
+            if (event.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        // Touch feedback for benefits on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const benefits = document.querySelectorAll('.benefit-item');
+            benefits.forEach(benefit => {
+                benefit.addEventListener('touchstart', function() {
+                    this.style.backgroundColor = 'rgba(255, 215, 0, 0.15)';
+                }, { passive: true });
+                
+                benefit.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                    }, 150);
+                }, { passive: true });
+            });
+        });
         
         // Initialize
         showSlide(0);
-        
-        // Performance optimization: Reduce animations on slower devices
-        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
-            document.documentElement.style.setProperty('--animation-speed', '0.5s');
-        }
-        
-        // Accessibility: Announce slide changes to screen readers
-        function announceSlideChange(slideNumber) {
-            const announcement = document.createElement('div');
-            announcement.setAttribute('aria-live', 'polite');
-            announcement.setAttribute('aria-atomic', 'true');
-            announcement.style.position = 'absolute';
-            announcement.style.left = '-10000px';
-            announcement.textContent = `Slide ${slideNumber} sur ${totalSlides}`;
-            document.body.appendChild(announcement);
-            
-            setTimeout(() => {
-                document.body.removeChild(announcement);
-            }, 1000);
-        }
-        
-        // Add to showSlide function
-        const originalShowSlide = showSlide;
-        showSlide = function(index) {
-            originalShowSlide(index);
-            announceSlideChange(index + 1);
-        };
     </script>
 </body>
 </html>
