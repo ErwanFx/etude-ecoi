@@ -3,152 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electro Concept OI - Consultation Solaire Interactive</title>
+    <title>Electro Concept OI - Consultation Solaire</title>
     <style>
-        * {
+        /* Reset et base - scoped pour éviter les conflits */
+        .solar-presentation * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        .solar-presentation {
             font-family: 'Arial', sans-serif;
-            background: transparent;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .presentation-container {
-            width: 90%;
+            width: 100%;
             max-width: 1000px;
-            height: 90vh;
+            margin: 0 auto;
             background: linear-gradient(135deg, #fff 0%, #fffaf0 100%);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2), 0 0 50px rgba(255, 215, 0, 0.1);
-            border: 3px solid #ffd700;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.15);
+            border: 2px solid #ffd700;
             overflow: hidden;
             position: relative;
+            min-height: 500px;
         }
 
-        .presentation-container::before {
+        /* Container responsive - s'adapte au contenu */
+        @media (min-width: 769px) {
+            .solar-presentation {
+                height: 80vh;
+                min-height: 600px;
+                max-height: 800px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .solar-presentation {
+                border-radius: 10px;
+                border-width: 1px;
+                box-shadow: 0 5px 15px rgba(255, 165, 0, 0.1);
+                min-height: 70vh;
+            }
+        }
+
+        /* Background effects - simplifiés sur mobile */
+        .solar-presentation::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
-                        linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.05) 50%, transparent 55%);
+            background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Confettis Animation */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ffd700;
-            animation: confetti-fall 3s ease-in-out infinite;
-            z-index: 5;
-        }
-
-        .confetti:nth-child(odd) {
-            background: #ff8c00;
-            animation-delay: 0.5s;
-        }
-
-        .confetti:nth-child(3n) {
-            background: #32cd32;
-            animation-delay: 1s;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
+        @media (min-width: 769px) {
+            .solar-presentation::before {
+                background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                           radial-gradient(circle at 80% 80%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
+                           linear-gradient(45deg, transparent 45%, rgba(255, 215, 0, 0.05) 50%, transparent 55%);
             }
         }
 
-        /* Avatar Progress */
-        .avatar-progress {
+        /* Progress bar */
+        .progress-bar {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px 15px;
-            border-radius: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffa500, #ffd700);
+            transition: width 0.3s ease;
+            border-radius: 0 0 4px 0;
             z-index: 10;
         }
 
+        /* Avatar Progress - optimisé mobile */
+        .avatar-progress {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+            font-size: 0.85rem;
+        }
+
         .avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5em;
-            margin-right: 10px;
-            animation: avatarBounce 2s ease-in-out infinite;
+            font-size: 1.2em;
+            margin-right: 8px;
+            animation: avatarBounce 3s ease-in-out infinite;
         }
 
         @keyframes avatarBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-3px); }
         }
 
         .progress-text {
-            font-size: 0.9em;
             font-weight: bold;
             color: #2f4f2f;
+            display: none;
         }
 
-        .solar-panel-bg {
+        @media (min-width: 481px) {
+            .avatar-progress {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .avatar {
+                width: 36px;
+                height: 36px;
+                margin-right: 10px;
+            }
+            
+            .progress-text {
+                display: block;
+            }
+        }
+
+        /* Logo - responsive */
+        .logo {
             position: absolute;
-            width: 60px;
-            height: 40px;
-            background: linear-gradient(45deg, #1e3c72, #2a5298);
-            border: 2px solid #ffd700;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
+            top: 15px;
+            right: 15px;
+            width: 100px;
+            height: auto;
+            z-index: 10;
         }
 
-        .solar-panel-bg:nth-child(even) {
-            animation-delay: 3s;
-            transform: rotate(15deg);
+        @media (min-width: 481px) {
+            .logo {
+                width: 140px;
+                top: 20px;
+                right: 20px;
+            }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+        @media (min-width: 769px) {
+            .logo {
+                width: 180px;
+                top: 20px;
+                right: 30px;
+            }
         }
 
+        .logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.1));
+        }
+
+        /* Slides */
         .slide {
             width: 100%;
             height: 100%;
-            padding: 60px;
+            padding: 80px 20px 80px 20px;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
-            z-index: 1;
-            animation: slideIn 0.5s ease-in-out;
-            background: transparent;
+            z-index: 5;
+            animation: slideIn 0.4s ease-out;
+            overflow-y: auto;
+        }
+
+        @media (min-width: 481px) {
+            .slide {
+                padding: 90px 30px 90px 30px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slide {
+                padding: 100px 40px 90px 40px;
+                overflow-y: visible;
+            }
         }
 
         .slide.active {
@@ -156,129 +199,200 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateX(30px); }
+            from { opacity: 0; transform: translateX(20px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
+        /* Typography - responsive */
         .slide h1 {
-            font-size: 3em;
+            font-size: 1.8rem;
             color: #ff8c00;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(255, 140, 0, 0.3);
+            text-shadow: 1px 1px 3px rgba(255, 140, 0, 0.2);
+            line-height: 1.2;
         }
 
         .slide h2 {
-            font-size: 2.5em;
+            font-size: 1.4rem;
             color: #228b22;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(34, 139, 34, 0.2);
+            text-shadow: 1px 1px 2px rgba(34, 139, 34, 0.1);
+            line-height: 1.3;
         }
 
         .slide h3 {
-            font-size: 2em;
+            font-size: 1.2rem;
             color: #ffa500;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         .slide p {
-            font-size: 1.3em;
+            font-size: 1rem;
             color: #2f4f2f;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            max-width: 800px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            max-width: 90%;
         }
 
-        /* Compteur d'économies animé */
+        @media (min-width: 481px) {
+            .slide h1 { font-size: 2.2rem; margin-bottom: 20px; }
+            .slide h2 { font-size: 1.7rem; margin-bottom: 18px; }
+            .slide h3 { font-size: 1.4rem; margin-bottom: 15px; }
+            .slide p { font-size: 1.1rem; margin-bottom: 15px; max-width: 85%; }
+        }
+
+        @media (min-width: 769px) {
+            .slide h1 { font-size: 2.8rem; margin-bottom: 25px; }
+            .slide h2 { font-size: 2.2rem; margin-bottom: 22px; }
+            .slide h3 { font-size: 1.8rem; margin-bottom: 18px; }
+            .slide p { font-size: 1.2rem; margin-bottom: 18px; max-width: 800px; }
+        }
+
+        /* Economy counter */
         .economy-counter {
-            font-size: 4em;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #228b22;
-            margin: 20px 0;
-            text-shadow: 2px 2px 4px rgba(34, 139, 34, 0.3);
+            margin: 15px 0;
+            text-shadow: 1px 1px 3px rgba(34, 139, 34, 0.2);
         }
 
+        @media (min-width: 481px) {
+            .economy-counter { font-size: 3rem; margin: 18px 0; }
+        }
+
+        @media (min-width: 769px) {
+            .economy-counter { font-size: 3.5rem; margin: 20px 0; }
+        }
+
+        /* Buttons - optimisés pour le tactile */
         .discover-btn {
             background: linear-gradient(45deg, #32cd32, #228b22);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1.2em;
+            padding: 14px 28px;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 8px 20px rgba(50, 205, 50, 0.3);
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(50, 205, 50, 0.25);
             transition: all 0.3s ease;
-            animation: pulse 2s infinite;
+            min-height: 48px; /* Accessibilité tactile */
+            min-width: 120px;
         }
 
-        .discover-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(50, 205, 50, 0.4);
+        .discover-btn:hover, .discover-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(50, 205, 50, 0.35);
+        }
+
+        @media (min-width: 481px) {
+            .discover-btn {
+                padding: 16px 32px;
+                font-size: 1.1rem;
+                margin-top: 18px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .discover-btn {
+                padding: 18px 36px;
+                font-size: 1.2rem;
+                margin-top: 20px;
+                animation: pulse 3s infinite;
+            }
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
-        .logo {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            width: 220px;
-            height: auto;
-            z-index: 10;
-        }
-
-        .logo img {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
-        }
-
+        /* Value box */
         .value-box {
             background: linear-gradient(45deg, #ffa500, #ff8c00);
             color: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            font-size: 1.5em;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-size: 1.2rem;
             font-weight: bold;
-            margin: 20px 0;
-            box-shadow: 0 10px 20px rgba(255, 165, 0, 0.3);
+            margin: 15px 0;
+            box-shadow: 0 6px 15px rgba(255, 165, 0, 0.25);
             position: relative;
             overflow: hidden;
         }
 
-        .value-counter {
-            display: inline-block;
-            min-width: 60px;
+        @media (min-width: 481px) {
+            .value-box {
+                padding: 18px 25px;
+                font-size: 1.3rem;
+                margin: 18px 0;
+            }
         }
 
-        /* Avantages avec dévoilement progressif */
+        @media (min-width: 769px) {
+            .value-box {
+                padding: 20px 30px;
+                font-size: 1.5rem;
+                margin: 20px 0;
+            }
+        }
+
+        /* Benefits list - responsive grid */
         .benefits-list {
-            text-align: left;
-            margin: 30px 0;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 12px;
             width: 100%;
-            max-width: 800px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        @media (min-width: 481px) {
+            .benefits-list {
+                gap: 15px;
+                margin: 25px 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .benefits-list {
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+                margin: 30px 0;
+                max-width: 800px;
+            }
         }
 
         .benefit-item {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            padding: 20px;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
+            min-height: 60px;
+        }
+
+        @media (min-width: 481px) {
+            .benefit-item {
+                padding: 18px;
+                border-radius: 12px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .benefit-item {
+                padding: 20px;
+                border-radius: 15px;
+                border-width: 2px;
+            }
         }
 
         .benefit-item.revealed {
@@ -286,37 +400,58 @@
             transform: translateY(0);
         }
 
-        .benefit-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-            background: rgba(255, 215, 0, 0.2);
+        .benefit-item:active {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 215, 0, 0.15);
         }
 
-        .benefit-item::before {
-            content: "🌞";
-            font-size: 2em;
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            opacity: 0.3;
+        @media (min-width: 769px) {
+            .benefit-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.25);
+                background: rgba(255, 215, 0, 0.15);
+            }
         }
 
         .benefit-title {
-            font-size: 1.1em;
+            font-size: 0.95rem;
             font-weight: bold;
             color: #2f4f2f;
             margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 481px) {
+            .benefit-title { font-size: 1rem; }
+        }
+
+        @media (min-width: 769px) {
+            .benefit-title { font-size: 1.1rem; }
         }
 
         .benefit-detail {
-            font-size: 0.9em;
+            font-size: 0.85rem;
             color: #666;
             display: none;
+            line-height: 1.4;
         }
 
-        .benefit-item:hover .benefit-detail {
+        @media (min-width: 481px) {
+            .benefit-detail { font-size: 0.9rem; }
+        }
+
+        .benefit-item:active .benefit-detail,
+        .benefit-item.show-detail .benefit-detail {
             display: block;
             animation: fadeIn 0.3s ease;
+        }
+
+        @media (min-width: 769px) {
+            .benefit-item:hover .benefit-detail {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
         }
 
         @keyframes fadeIn {
@@ -324,100 +459,571 @@
             to { opacity: 1; }
         }
 
-        /* Progress bars pour les étapes */
+        /* Stats container */
+        .stats-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        @media (min-width: 481px) {
+            .stats-container {
+                flex-direction: row;
+                justify-content: space-around;
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .stats-container {
+                margin: 30px 0;
+            }
+        }
+
+        .stat {
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 165, 0, 0.08));
+            border-radius: 10px;
+            border: 1px solid #ffd700;
+            flex: 1;
+        }
+
+        @media (min-width: 481px) {
+            .stat {
+                padding: 18px;
+                border-radius: 12px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .stat {
+                padding: 20px;
+                border-radius: 15px;
+                border-width: 2px;
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff8c00;
+            display: block;
+            text-shadow: 1px 1px 3px rgba(255, 140, 0, 0.2);
+        }
+
+        @media (min-width: 481px) {
+            .stat-number { font-size: 3rem; }
+        }
+
+        @media (min-width: 769px) {
+            .stat-number { font-size: 3.5rem; }
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #228b22;
+            margin-top: 8px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 481px) {
+            .stat-label { font-size: 1rem; margin-top: 10px; }
+        }
+
+        @media (min-width: 769px) {
+            .stat-label { font-size: 1.1rem; margin-top: 12px; }
+        }
+
+        /* Navigation - optimisée mobile */
+        .navigation {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 15;
+            padding: 0 15px;
+            width: calc(100% - 30px);
+            justify-content: center;
+        }
+
+        @media (min-width: 481px) {
+            .navigation {
+                bottom: 20px;
+                gap: 15px;
+                width: auto;
+                padding: 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navigation {
+                bottom: 25px;
+                gap: 20px;
+            }
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255, 165, 0, 0.25);
+            min-height: 44px; /* Accessibilité tactile */
+            flex: 1;
+            max-width: 100px;
+        }
+
+        @media (min-width: 481px) {
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
+                border-radius: 22px;
+                flex: none;
+                max-width: none;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-btn {
+                padding: 12px 25px;
+                border-radius: 25px;
+            }
+        }
+
+        .nav-btn:hover, .nav-btn:active {
+            background: linear-gradient(45deg, #ff8c00, #ff7f00);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.35);
+        }
+
+        .nav-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .slide-counter {
+            background: linear-gradient(45deg, #228b22, #32cd32);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(34, 139, 34, 0.25);
+            font-size: 0.85rem;
+            order: 2;
+        }
+
+        @media (max-width: 480px) {
+            .slide-counter {
+                order: 0;
+                margin-bottom: 8px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .navigation {
+                flex-wrap: wrap;
+                bottom: 10px;
+            }
+        }
+
+        @media (min-width: 481px) {
+            .slide-counter {
+                padding: 10px 15px;
+                border-radius: 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slide-counter {
+                padding: 10px 16px;
+                border-radius: 20px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Step elements */
+        .step-number {
+            background: linear-gradient(45deg, #ffa500, #ff8c00);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.25);
+        }
+
+        @media (min-width: 481px) {
+            .step-number {
+                width: 55px;
+                height: 55px;
+                font-size: 1.7rem;
+                margin-bottom: 18px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+        }
+
         .step-progress {
             width: 100%;
-            max-width: 400px;
-            height: 20px;
+            max-width: 300px;
+            height: 12px;
             background: rgba(255, 215, 0, 0.2);
-            border-radius: 10px;
-            margin: 20px 0;
+            border-radius: 6px;
+            margin: 15px 0;
             overflow: hidden;
             position: relative;
+        }
+
+        @media (min-width: 481px) {
+            .step-progress {
+                max-width: 350px;
+                height: 15px;
+                border-radius: 8px;
+                margin: 18px 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .step-progress {
+                max-width: 400px;
+                height: 18px;
+                border-radius: 10px;
+                margin: 20px 0;
+            }
         }
 
         .step-progress-fill {
             height: 100%;
             background: linear-gradient(45deg, #32cd32, #228b22);
-            border-radius: 10px;
+            border-radius: inherit;
             width: 0%;
-            transition: width 2s ease-in-out;
-            position: relative;
+            transition: width 1.5s ease-in-out;
         }
 
-        .step-progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .step-number {
-            background: linear-gradient(45deg, #ffa500, #ff8c00);
+        /* Warning */
+        .warning {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
             color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
+            padding: 12px 18px;
+            border-radius: 8px;
             font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(255, 165, 0, 0.3);
+            margin: 15px 0;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 481px) {
+            .warning {
+                padding: 15px 22px;
+                border-radius: 10px;
+                margin: 18px 0;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .warning {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+                margin: 20px 0;
+            }
+        }
+
+        .warning:before {
+            content: "⚠ ";
+            font-size: 1.1em;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(45deg, #ff8c00, #ffd700);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+
+        @media (min-width: 481px) {
+            .highlight {
+                padding: 5px 14px;
+                border-radius: 5px;
+                font-size: 1em;
+            }
+        }
+
+        /* Exclusive badge */
+        .exclusive-badge {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            animation: gentle-pulse 3s infinite;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.25);
+            font-size: 0.85rem;
+            z-index: 12;
+        }
+
+        @media (min-width: 481px) {
+            .exclusive-badge {
+                padding: 10px 18px;
+                border-radius: 22px;
+                font-size: 0.9rem;
+                top: 18px;
+                left: 18px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .exclusive-badge {
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-size: 1rem;
+                top: 20px;
+                left: 20px;
+            }
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Urgent slide */
+        .slide.urgent {
+            background: linear-gradient(135deg, #8b0000 0%, #a0522d 50%, #cd853f 100%);
+            color: white;
+            box-shadow: inset 0 0 15px rgba(139, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 8px;
+            animation: gentlePulse 5s ease-in-out infinite;
+        }
+
+        @media (min-width: 481px) {
+            .slide.urgent {
+                margin: 10px;
+                border-radius: 12px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slide.urgent {
+                margin: 10px;
+                border-radius: 15px;
+            }
+        }
+
+        .slide.urgent h2 {
+            color: #fff8dc;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .slide.urgent p {
+            color: #ffe4e1;
+        }
+
+        .slide.urgent .logo img {
+            filter: drop-shadow(1px 1px 3px rgba(0,0,0,0.7)) brightness(1.2);
+            background: rgba(255,255,255,0.9);
+            border-radius: 6px;
+            padding: 6px;
+        }
+
+        @media (min-width: 481px) {
+            .slide.urgent .logo img {
+                border-radius: 8px;
+                padding: 8px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slide.urgent .logo img {
+                border-radius: 10px;
+                padding: 10px;
+            }
+        }
+
+        @keyframes gentlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.002); }
+        }
+
+        /* Lists styling */
+        .slide ul, .slide ol {
+            text-align: left;
+            margin: 15px 0;
+            padding-left: 0;
+            list-style: none;
+            max-width: 90%;
+        }
+
+        @media (min-width: 481px) {
+            .slide ul, .slide ol {
+                margin: 18px 0;
+                max-width: 85%;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .slide ul, .slide ol {
+                margin: 20px 0;
+                max-width: 600px;
+            }
+        }
+
+        .slide li {
+            margin: 10px 0;
+            padding: 8px 0;
+            font-size: 1rem;
+            color: #2f4f2f;
+            line-height: 1.5;
             position: relative;
         }
 
-        .step-number::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border: 3px solid #ffd700;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 3s linear infinite;
+        @media (min-width: 481px) {
+            .slide li {
+                margin: 12px 0;
+                padding: 10px 0;
+                font-size: 1.1rem;
+            }
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @media (min-width: 769px) {
+            .slide li {
+                margin: 15px 0;
+                font-size: 1.2rem;
+            }
         }
 
-        /* Notifications animées */
+        /* Invoice mockup */
+        .invoice-mockup {
+            background: white;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: monospace;
+            text-align: left;
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.15);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            max-width: 90%;
+        }
+
+        @media (min-width: 481px) {
+            .invoice-mockup {
+                padding: 18px;
+                border-radius: 10px;
+                margin: 18px 0;
+                font-size: 0.9rem;
+                max-width: 85%;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .invoice-mockup {
+                padding: 20px;
+                margin: 20px 0;
+                font-size: 1rem;
+                max-width: 400px;
+            }
+        }
+
+        /* Email notification */
         .email-notification {
             background: #4285f4;
             color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9em;
-            margin: 10px;
-            animation: notification-slide 3s ease-in-out infinite;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 10px 0;
+            animation: notification-slide 4s ease-in-out infinite;
             display: inline-block;
         }
 
+        @media (min-width: 481px) {
+            .email-notification {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+                margin: 12px 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .email-notification {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin: 15px 0;
+            }
+        }
+
         @keyframes notification-slide {
-            0%, 100% { transform: translateX(-20px); opacity: 0.7; }
+            0%, 100% { transform: translateX(-15px); opacity: 0.8; }
             50% { transform: translateX(0px); opacity: 1; }
         }
 
+        /* Calendar fill */
         .calendar-fill {
-            width: 60px;
-            height: 60px;
+            width: 45px;
+            height: 45px;
             background: white;
-            border: 3px solid #ff8c00;
-            border-radius: 10px;
+            border: 2px solid #ff8c00;
+            border-radius: 8px;
             position: relative;
-            margin: 20px auto;
+            margin: 15px auto;
             animation: calendar-fill 2s ease-in-out;
+        }
+
+        @media (min-width: 481px) {
+            .calendar-fill {
+                width: 50px;
+                height: 50px;
+                margin: 18px auto;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .calendar-fill {
+                width: 60px;
+                height: 60px;
+                margin: 20px auto;
+                border-width: 3px;
+                border-radius: 10px;
+            }
         }
 
         .calendar-fill::before {
@@ -426,7 +1032,15 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.5em;
+            font-size: 1.2em;
+        }
+
+        @media (min-width: 481px) {
+            .calendar-fill::before { font-size: 1.3em; }
+        }
+
+        @media (min-width: 769px) {
+            .calendar-fill::before { font-size: 1.5em; }
         }
 
         @keyframes calendar-fill {
@@ -434,450 +1048,98 @@
             100% { background: #32cd32; }
         }
 
-        .warning {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            margin: 20px 0;
-            display: inline-block;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .warning:before {
-            content: "⚠ ";
-            font-size: 1.2em;
-        }
-
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            margin: 30px 0;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-            border-radius: 15px;
-            border: 2px solid #ffd700;
-        }
-
-        .stat-number {
-            font-size: 4em;
-            font-weight: bold;
-            color: #ff8c00;
-            display: block;
-            text-shadow: 2px 2px 4px rgba(255, 140, 0, 0.3);
-        }
-
-        .stat-label {
-            font-size: 1.2em;
-            color: #228b22;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        .navigation {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .nav-btn {
-            background: linear-gradient(45deg, #ffa500, #ff8c00);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
-        }
-
-        .nav-btn:hover {
-            background: linear-gradient(45deg, #ff8c00, #ff7f00);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
-        }
-
-        .nav-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .slide-counter {
-            background: linear-gradient(45deg, #228b22, #32cd32);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(34, 139, 34, 0.3);
-        }
-
-        .progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #ffa500, #ffd700);
-            transition: width 0.3s ease;
-            border-radius: 0 0 5px 0;
-            z-index: 5;
-        }
-
-        .exclusive-badge {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            animation: gentle-pulse 2s infinite;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-        }
-
-        @keyframes gentle-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .highlight {
-            background: linear-gradient(45deg, #ff8c00, #ffd700);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .invoice-mockup {
-            background: white;
-            border: 2px solid #ffd700;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
-            font-family: monospace;
-            text-align: left;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
-        }
-
+        /* Solar icon */
         .solar-icon {
             color: #ffa500;
-            font-size: 1.5em;
-            margin: 0 10px;
-        }
-
-        /* Slide spéciale rouge pour l'urgence (slide 8) - Version Smooth */
-        .slide.urgent {
-            background: linear-gradient(135deg, #8b0000 0%, #a0522d 50%, #cd853f 100%);
-            color: white;
-            box-shadow: inset 0 0 20px rgba(139, 0, 0, 0.3);
-            border-radius: 15px;
-            margin: 10px;
-            animation: gentlePulse 4s ease-in-out infinite;
-        }
-
-        .slide.urgent h2 {
-            color: #fff8dc;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-            font-size: 2.6em;
-        }
-
-        .slide.urgent p {
-            color: #ffe4e1;
-        }
-
-        .slide.urgent .exclusive-badge {
-            background: linear-gradient(45deg, #b22222, #cd853f);
-            animation: gentleBlink 3s ease-in-out infinite;
-            font-size: 1.1em;
-            padding: 12px 25px;
-        }
-
-        .slide.urgent .warning {
-            background: linear-gradient(45deg, #a0522d, #cd853f);
             font-size: 1.2em;
-            padding: 18px 30px;
-            box-shadow: 0 5px 15px rgba(160, 82, 45, 0.3);
+            margin: 0 5px;
         }
 
-        .slide.urgent .highlight {
-            background: linear-gradient(45deg, #ffd700, #daa520);
-            color: #8b0000;
-            font-size: 1.1em;
-            padding: 6px 18px;
-            animation: gentleGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.005); }
-        }
-
-        @keyframes gentleBlink {
-            0%, 80% { opacity: 1; }
-            90% { opacity: 0.8; }
-        }
-
-        @keyframes gentleGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
-        }
-
-        .slide.urgent .logo img {
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.7)) brightness(1.2);
-            background: rgba(255,255,255,0.9);
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .presentation-container {
-                width: 100%;
-                height: 100vh;
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
-            }
-
-            .slide {
-                padding: 20px 15px;
-                height: 100%;
-                overflow-y: auto;
-            }
-            
-            .slide h1 {
-                font-size: 1.8em;
-                margin-bottom: 15px;
-            }
-            
-            .slide h2 {
-                font-size: 1.5em;
-                margin-bottom: 15px;
-                line-height: 1.2;
-            }
-
-            .slide p {
-                font-size: 1em;
-                margin-bottom: 10px;
-                line-height: 1.4;
-            }
-
-            .economy-counter {
-                font-size: 2.5em;
-                margin: 15px 0;
-            }
-
-            .discover-btn {
-                padding: 12px 20px;
-                font-size: 1em;
-                margin-top: 15px;
-            }
-
-            .value-box {
-                padding: 15px 20px;
-                font-size: 1.2em;
-                margin: 15px 0;
-            }
-            
-            .stats-container, .benefits-list {
-                flex-direction: column;
-                gap: 15px;
-                margin: 20px 0;
-            }
-
-            .benefits-list {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .benefit-item {
-                padding: 15px;
-                margin: 0;
-            }
-
-            .benefit-title {
-                font-size: 1em;
-            }
-
-            .stat {
-                padding: 15px;
-                margin: 0;
-            }
-
-            .stat-number {
-                font-size: 2.5em;
-            }
-
-            .stat-label {
-                font-size: 1em;
-            }
-            
-            .navigation {
-                bottom: 10px;
-                gap: 10px;
-                flex-wrap: wrap;
-                padding: 0 10px;
-            }
-            
-            .nav-btn {
-                padding: 8px 15px;
-                font-size: 0.8em;
-                flex: 1;
-                min-width: 80px;
-            }
-
-            .slide-counter {
-                padding: 6px 12px;
-                font-size: 0.9em;
-                order: 3;
-                width: 100%;
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            .logo {
-                width: 120px;
-                top: 10px;
-                right: 10px;
-            }
-
-            .avatar-progress {
-                top: 10px;
-                left: 10px;
-                padding: 8px 12px;
-                font-size: 0.8em;
-            }
-
-            .avatar {
-                width: 30px;
-                height: 30px;
-                font-size: 1.2em;
-                margin-right: 8px;
-            }
-
-            .step-number {
-                width: 50px;
-                height: 50px;
-                font-size: 1.5em;
-                margin-bottom: 15px;
-            }
-
-            .step-progress {
-                max-width: 100%;
-                height: 15px;
-                margin: 15px 0;
-            }
-
-            .warning {
-                padding: 12px 20px;
-                font-size: 1em;
-                margin: 15px 0;
-            }
-
-            .invoice-mockup {
-                padding: 15px;
-                margin: 15px 0;
-                font-size: 0.9em;
-            }
-
-            .email-notification {
-                padding: 8px 15px;
-                font-size: 0.8em;
-                margin: 8px 0;
-            }
-
-            .calendar-fill {
-                width: 50px;
-                height: 50px;
-                margin: 15px auto;
-            }
-
-            .exclusive-badge {
-                padding: 8px 15px;
-                font-size: 0.9em;
-                top: 10px;
-                left: 10px;
-            }
-
-            .highlight {
-                padding: 4px 12px;
-                font-size: 1em;
-            }
-
-            .solar-panel-bg {
-                display: none;
-            }
-
-            .confetti {
-                width: 8px;
-                height: 8px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .slide {
-                padding: 15px 10px;
-            }
-
-            .slide h1 {
-                font-size: 1.6em;
-            }
-
-            .slide h2 {
+        @media (min-width: 481px) {
+            .solar-icon {
                 font-size: 1.3em;
+                margin: 0 8px;
             }
+        }
 
+        @media (min-width: 769px) {
+            .solar-icon {
+                font-size: 1.5em;
+                margin: 0 10px;
+            }
+        }
+
+        /* Reduced animations on mobile for performance */
+        @media (max-width: 768px) {
+            * {
+                animation-duration: 0.3s !important;
+            }
+            
+            .benefit-item {
+                transition: all 0.3s ease;
+            }
+            
+            .step-progress-fill {
+                transition: width 1s ease-in-out;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .solar-presentation {
+                background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%);
+                border-color: #ffd700;
+            }
+            
             .slide p {
-                font-size: 0.9em;
+                color: #e0e0e0;
             }
-
-            .economy-counter {
-                font-size: 2em;
+            
+            .benefit-item {
+                background: rgba(255, 215, 0, 0.1);
+                border-color: #ffd700;
             }
-
-            .value-box {
-                font-size: 1.1em;
-                padding: 12px 15px;
+            
+            .stat {
+                background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
             }
-
-            .nav-btn {
-                padding: 6px 12px;
-                font-size: 0.7em;
+            
+            .invoice-mockup {
+                background: #3a3a3a;
+                color: #e0e0e0;
+                border-color: #ffd700;
             }
+        }
 
-            .logo {
-                width: 100px;
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
+        }
 
-            .avatar-progress {
-                font-size: 0.7em;
-                padding: 6px 10px;
+        /* Focus states for accessibility */
+        .nav-btn:focus, .discover-btn:focus, .benefit-item:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .solar-presentation {
+                border-width: 3px;
             }
-
-            .avatar {
-                width: 25px;
-                height: 25px;
-                font-size: 1em;
+            
+            .benefit-item, .stat {
+                border-width: 2px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
+    <div class="solar-presentation">
         <div class="progress-bar" id="progressBar"></div>
         
         <!-- Avatar Progress -->
@@ -885,14 +1147,8 @@
             <div class="avatar" id="avatar">🌱</div>
             <div class="progress-text" id="avatarText">Début de votre parcours solaire</div>
         </div>
-
-        <!-- Panneaux solaires décoratifs -->
-        <div class="solar-panel-bg" style="top: 10%; left: 5%;"></div>
-        <div class="solar-panel-bg" style="top: 20%; right: 8%;"></div>
-        <div class="solar-panel-bg" style="bottom: 15%; left: 10%;"></div>
-        <div class="solar-panel-bg" style="bottom: 25%; right: 12%;"></div>
         
-        <!-- Slide 1: Accueil avec confettis et compteur -->
+        <!-- Slide 1: Accueil -->
         <div class="slide active" id="slide1">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
@@ -900,8 +1156,8 @@
             <h1>🌞 Félicitations !</h1>
             <p>Vous venez de réserver votre consultation solaire gratuite avec Electro Concept OI</p>
             <div class="economy-counter" id="economyCounter">0€</div>
-            <p style="font-size: 1.2em; color: #666;">d'économies vous attendent !</p>
-            <p style="font-size: 1.5em; color: #228b22; font-weight: bold; margin-top: 20px;">
+            <p style="font-size: 1.1em; color: #666;">d'économies vous attendent !</p>
+            <p style="font-size: 1.3em; color: #228b22; font-weight: bold; margin-top: 15px;">
                 Vous avez fait le bon choix pour économiser sur votre facture d'électricité
             </p>
             <button class="discover-btn" onclick="changeSlide(1)">
@@ -917,10 +1173,10 @@
             <h2>Pourquoi cette consultation va changer votre facture d'électricité</h2>
             <p><strong>L'objectif de votre consultation :</strong> découvrir exactement combien vous pouvez économiser</p>
             <p style="color: #ff6b35; font-weight: bold;">Beaucoup de Réunionnais ratent cette opportunité par manque de préparation</p>
-            <p style="font-size: 1.4em; color: #228b22;">Suivez ce guide pour maximiser vos résultats <span class="solar-icon">☀️</span></p>
+            <p style="font-size: 1.2em; color: #228b22;">Suivez ce guide pour maximiser vos résultats <span class="solar-icon">☀️</span></p>
         </div>
 
-        <!-- Slide 3: Ce que vous recevez avec dévoilement progressif -->
+        <!-- Slide 3: Ce que vous recevez -->
         <div class="slide" id="slide3">
             <div class="logo">
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
@@ -955,8 +1211,8 @@
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
             <h2>2 étapes simples pour réussir votre consultation</h2>
-            <p style="font-size: 1.4em; margin-bottom: 30px;">Nous allons vous expliquer en 30 secondes <span class="solar-icon">⏱️</span></p>
-            <p style="font-size: 1.3em;">Comment bien vous préparer</p>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">Nous allons vous expliquer en 30 secondes <span class="solar-icon">⏱️</span></p>
+            <p style="font-size: 1.1em;">Comment bien vous préparer</p>
             <p>Ces étapes sont au nombre de 2, elles sont très simples</p>
             <div class="step-number">2</div>
             <div class="step-progress">
@@ -972,10 +1228,10 @@
             <div class="step-number">1</div>
             <h2>ÉTAPE 1 : Vérifiez vos emails</h2>
             <div class="email-notification">📧 Nouveau mail de confirmation reçu</div>
-            <ul style="text-align: left; font-size: 1.2em; margin: 20px 0; list-style: none;">
-                <li style="margin: 15px 0;">🌞 Allez dans votre boîte mail (Gmail, Yahoo, Orange...)</li>
-                <li style="margin: 15px 0;">🌞 Cliquez sur notre mail de confirmation</li>
-                <li style="margin: 15px 0;">🌞 Ajoutez le rendez-vous à votre calendrier</li>
+            <ul>
+                <li>🌞 Allez dans votre boîte mail (Gmail, Yahoo, Orange...)</li>
+                <li>🌞 Cliquez sur notre mail de confirmation</li>
+                <li>🌞 Ajoutez le rendez-vous à votre calendrier</li>
             </ul>
             <div class="calendar-fill"></div>
             <div class="warning">IMPORTANT : Sans cela, vous pourriez oublier votre consultation</div>
@@ -991,12 +1247,12 @@
             </div>
             <div class="step-number">2</div>
             <h2>ÉTAPE 2 : Préparez vos factures d'électricité</h2>
-            <ol style="text-align: left; font-size: 1.2em; margin: 20px 0;">
+            <ol>
                 <li>Sortez vos 2 dernières factures EDF</li>
                 <li>Même si c'est seulement 2-3 minutes de votre temps</li>
                 <li>C'est essentiel pour calculer vos économies précises</li>
             </ol>
-            <p style="font-size: 1.3em; color: #ff6b35; font-weight: bold;">
+            <p style="font-size: 1.1em; color: #ff6b35; font-weight: bold;">
                 Sans factures = Consultation moins efficace <span class="solar-icon">📄</span>
             </p>
             <div class="invoice-mockup">
@@ -1039,17 +1295,17 @@
             </div>
             <div class="exclusive-badge">✨ EXCLUSIF ✨</div>
             <h2>💎 Opportunité Unique et Limitée</h2>
-            <p style="font-size: 1.5em; font-weight: bold; margin: 20px 0;">Cette consultation gratuite est réservée exclusivement pour vous</p>
-            <p style="font-size: 1.3em; font-weight: bold;">Votre créneau a été spécialement bloqué dans notre agenda.</p>
-            <p style="font-size: 1.4em; color: #ffd700; font-weight: bold; margin: 20px 0;">
+            <p style="font-size: 1.3em; font-weight: bold; margin: 15px 0;">Cette consultation gratuite est réservée exclusivement pour vous</p>
+            <p style="font-size: 1.1em; font-weight: bold;">Votre créneau a été spécialement bloqué dans notre agenda.</p>
+            <p style="font-size: 1.2em; color: #ffd700; font-weight: bold; margin: 15px 0;">
                 ⭐ Soyez présent, cette chance ne se représentera pas ⭐
             </p>
-            <p style="font-size: 1.2em;">Notre expert solaire certifié analysera votre situation pour des économies maximales 👨‍💼</p>
+            <p style="font-size: 1.1em;">Notre expert solaire certifié analysera votre situation pour des économies maximales 👨‍💼</p>
             <div class="warning">🎯 Important : Votre présence est essentielle</div>
-            <p style="font-weight: bold; font-size: 1.3em; margin-top: 20px;">
+            <p style="font-weight: bold; font-size: 1.1em; margin-top: 15px;">
                 En cas d'absence : <span class="highlight">Aucun second rendez-vous possible</span>
             </p>
-            <p style="font-size: 1.2em; color: #ffd700; font-weight: bold; margin-top: 15px;">
+            <p style="font-size: 1.1em; color: #ffd700; font-weight: bold; margin-top: 12px;">
                 📅 Une seule chance = Soyez au rendez-vous
             </p>
         </div>
@@ -1060,11 +1316,11 @@
                 <img src="logo-electro-concept-oi.png" alt="Electro Concept OI">
             </div>
             <h2>Votre transition vers l'énergie propre commence maintenant ! 🌱</h2>
-            <p style="font-size: 1.4em; color: #228b22; font-weight: bold;">À très bientôt pour votre consultation ! <span class="solar-icon">🤝</span></p>
+            <p style="font-size: 1.2em; color: #228b22; font-weight: bold;">À très bientôt pour votre consultation ! <span class="solar-icon">🤝</span></p>
             <p>Merci d'avoir pris le temps de lire ce guide</p>
             <p>Votre expert solaire a hâte de vous aider</p>
-            <p style="font-size: 1.3em; color: #ff8c00;">Ensemble, réduisons votre facture d'électricité <span class="solar-icon">⚡</span></p>
-            <p style="margin-top: 40px; font-style: italic;">
+            <p style="font-size: 1.1em; color: #ff8c00;">Ensemble, réduisons votre facture d'électricité <span class="solar-icon">⚡</span></p>
+            <p style="margin-top: 30px; font-style: italic;">
                 Avec nos meilleures salutations solaires,<br>
                 <strong>L'équipe Electro Concept OI</strong> <span class="solar-icon">☀️</span>
             </p>
@@ -1072,11 +1328,11 @@
 
         <!-- Navigation -->
         <div class="navigation">
-            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">❮ Précédent</button>
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" aria-label="Slide précédent">❮ Précédent</button>
             <div class="slide-counter">
                 <span id="currentSlide">1</span> / <span id="totalSlides">9</span>
             </div>
-            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant ❯</button>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)" aria-label="Slide suivant">Suivant ❯</button>
         </div>
     </div>
 
@@ -1100,34 +1356,18 @@
         
         document.getElementById('totalSlides').textContent = totalSlides;
         
-        // Confettis creation
-        function createConfetti() {
-            for (let i = 0; i < 30; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.animationDelay = Math.random() * 3 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.getElementById('slide1').appendChild(confetti);
-                
-                // Remove confetti after animation
-                setTimeout(() => {
-                    if (confetti.parentNode) {
-                        confetti.parentNode.removeChild(confetti);
-                    }
-                }, 5000);
-            }
-        }
-        
-        // Animated counter
+        // Animated counter with performance optimization
         function animateCounter(elementId, start, end, duration, suffix = '') {
             const element = document.getElementById(elementId);
+            if (!element) return;
+            
             const startTime = Date.now();
+            const startValue = parseInt(element.textContent) || start;
             
             function update() {
                 const now = Date.now();
                 const progress = Math.min((now - startTime) / duration, 1);
-                const current = Math.floor(progress * (end - start) + start);
+                const current = Math.floor(progress * (end - startValue) + startValue);
                 element.textContent = current + suffix;
                 
                 if (progress < 1) {
@@ -1138,13 +1378,14 @@
             update();
         }
         
-        // Benefits reveal
+        // Benefits reveal with mobile optimization
         function revealBenefits() {
             const benefits = document.querySelectorAll('.benefit-item');
             benefits.forEach((benefit, index) => {
+                const delay = parseInt(benefit.dataset.delay) || index * 200;
                 setTimeout(() => {
                     benefit.classList.add('revealed');
-                }, benefit.dataset.delay || index * 300);
+                }, delay);
             });
         }
         
@@ -1154,9 +1395,25 @@
             if (progressBar) {
                 setTimeout(() => {
                     progressBar.style.width = targetWidth + '%';
-                }, 500);
+                }, 300);
             }
         }
+        
+        // Mobile benefit detail toggle
+        function toggleBenefitDetail(benefit) {
+            if (window.innerWidth <= 768) {
+                benefit.classList.toggle('show-detail');
+            }
+        }
+        
+        // Add touch support for benefits on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const benefits = document.querySelectorAll('.benefit-item');
+            benefits.forEach(benefit => {
+                benefit.addEventListener('click', () => toggleBenefitDetail(benefit));
+                benefit.addEventListener('touchstart', () => toggleBenefitDetail(benefit));
+            });
+        });
         
         function showSlide(index) {
             slides.forEach(slide => slide.classList.remove('active'));
@@ -1171,23 +1428,24 @@
             // Update avatar
             const avatarElement = document.getElementById('avatar');
             const avatarTextElement = document.getElementById('avatarText');
-            avatarElement.textContent = avatarStates[index].emoji;
-            avatarTextElement.textContent = avatarStates[index].text;
+            if (avatarElement && avatarTextElement) {
+                avatarElement.textContent = avatarStates[index].emoji;
+                avatarTextElement.textContent = avatarStates[index].text;
+            }
             
-            // Slide-specific animations
+            // Slide-specific animations with performance checks
             switch(index) {
                 case 0: // Slide 1
-                    createConfetti();
                     setTimeout(() => {
-                        animateCounter('economyCounter', 0, 494, 2000, '€');
-                    }, 1000);
+                        animateCounter('economyCounter', 0, 494, 1500, '€');
+                    }, 500);
                     break;
                     
                 case 2: // Slide 3
                     setTimeout(() => {
                         revealBenefits();
-                        animateCounter('valueCounter', 0, 494, 2000);
-                    }, 500);
+                        animateCounter('valueCounter', 0, 494, 1500);
+                    }, 300);
                     break;
                     
                 case 3: // Slide 4
@@ -1204,8 +1462,10 @@
             }
             
             // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            if (prevBtn) prevBtn.disabled = index === 0;
+            if (nextBtn) nextBtn.disabled = index === totalSlides - 1;
         }
         
         function changeSlide(direction) {
@@ -1225,25 +1485,31 @@
             }
         });
         
-        // Touch/swipe support for mobile
+        // Enhanced touch/swipe support
         let touchStartX = 0;
         let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
         
         document.addEventListener('touchstart', function(event) {
             touchStartX = event.changedTouches[0].screenX;
-        });
+            touchStartY = event.changedTouches[0].screenY;
+        }, { passive: true });
         
         document.addEventListener('touchend', function(event) {
             touchEndX = event.changedTouches[0].screenX;
+            touchEndY = event.changedTouches[0].screenY;
             handleSwipe();
-        });
+        }, { passive: true });
         
         function handleSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
+            const diffX = touchStartX - touchEndX;
+            const diffY = Math.abs(touchStartY - touchEndY);
             
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
+            // Only handle horizontal swipes (avoid conflicts with vertical scrolling)
+            if (Math.abs(diffX) > swipeThreshold && diffY < 100) {
+                if (diffX > 0) {
                     changeSlide(1); // Swipe left, go to next slide
                 } else {
                     changeSlide(-1); // Swipe right, go to previous slide
@@ -1253,6 +1519,33 @@
         
         // Initialize
         showSlide(0);
+        
+        // Performance optimization: Reduce animations on slower devices
+        if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+            document.documentElement.style.setProperty('--animation-speed', '0.5s');
+        }
+        
+        // Accessibility: Announce slide changes to screen readers
+        function announceSlideChange(slideNumber) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.style.position = 'absolute';
+            announcement.style.left = '-10000px';
+            announcement.textContent = `Slide ${slideNumber} sur ${totalSlides}`;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+        
+        // Add to showSlide function
+        const originalShowSlide = showSlide;
+        showSlide = function(index) {
+            originalShowSlide(index);
+            announceSlideChange(index + 1);
+        };
     </script>
 </body>
 </html>
