@@ -645,41 +645,233 @@
         }
 
         @media (max-width: 768px) {
+            .presentation-container {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
+
             .slide {
-                padding: 40px 20px;
+                padding: 20px 15px;
+                height: 100%;
+                overflow-y: auto;
             }
             
             .slide h1 {
-                font-size: 2em;
+                font-size: 1.8em;
+                margin-bottom: 15px;
             }
             
             .slide h2 {
-                font-size: 1.8em;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+                line-height: 1.2;
+            }
+
+            .slide p {
+                font-size: 1em;
+                margin-bottom: 10px;
+                line-height: 1.4;
+            }
+
+            .economy-counter {
+                font-size: 2.5em;
+                margin: 15px 0;
+            }
+
+            .discover-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+                margin-top: 15px;
+            }
+
+            .value-box {
+                padding: 15px 20px;
+                font-size: 1.2em;
+                margin: 15px 0;
             }
             
             .stats-container, .benefits-list {
                 flex-direction: column;
-                gap: 20px;
-            }
-            
-            .navigation {
-                bottom: 20px;
                 gap: 15px;
-            }
-            
-            .nav-btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-
-            .logo {
-                width: 150px;
-                top: 15px;
-                right: 15px;
+                margin: 20px 0;
             }
 
             .benefits-list {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .benefit-item {
+                padding: 15px;
+                margin: 0;
+            }
+
+            .benefit-title {
+                font-size: 1em;
+            }
+
+            .stat {
+                padding: 15px;
+                margin: 0;
+            }
+
+            .stat-number {
+                font-size: 2.5em;
+            }
+
+            .stat-label {
+                font-size: 1em;
+            }
+            
+            .navigation {
+                bottom: 10px;
+                gap: 10px;
+                flex-wrap: wrap;
+                padding: 0 10px;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.8em;
+                flex: 1;
+                min-width: 80px;
+            }
+
+            .slide-counter {
+                padding: 6px 12px;
+                font-size: 0.9em;
+                order: 3;
+                width: 100%;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .logo {
+                width: 120px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .avatar-progress {
+                top: 10px;
+                left: 10px;
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+
+            .avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 1.2em;
+                margin-right: 8px;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+
+            .step-progress {
+                max-width: 100%;
+                height: 15px;
+                margin: 15px 0;
+            }
+
+            .warning {
+                padding: 12px 20px;
+                font-size: 1em;
+                margin: 15px 0;
+            }
+
+            .invoice-mockup {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 0.9em;
+            }
+
+            .email-notification {
+                padding: 8px 15px;
+                font-size: 0.8em;
+                margin: 8px 0;
+            }
+
+            .calendar-fill {
+                width: 50px;
+                height: 50px;
+                margin: 15px auto;
+            }
+
+            .exclusive-badge {
+                padding: 8px 15px;
+                font-size: 0.9em;
+                top: 10px;
+                left: 10px;
+            }
+
+            .highlight {
+                padding: 4px 12px;
+                font-size: 1em;
+            }
+
+            .solar-panel-bg {
+                display: none;
+            }
+
+            .confetti {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 15px 10px;
+            }
+
+            .slide h1 {
+                font-size: 1.6em;
+            }
+
+            .slide h2 {
+                font-size: 1.3em;
+            }
+
+            .slide p {
+                font-size: 0.9em;
+            }
+
+            .economy-counter {
+                font-size: 2em;
+            }
+
+            .value-box {
+                font-size: 1.1em;
+                padding: 12px 15px;
+            }
+
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.7em;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            .avatar-progress {
+                font-size: 0.7em;
+                padding: 6px 10px;
+            }
+
+            .avatar {
+                width: 25px;
+                height: 25px;
+                font-size: 1em;
             }
         }
     </style>
